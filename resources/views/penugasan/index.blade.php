@@ -21,302 +21,94 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <!-- customar project  start -->
-                <div class="col-xl-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row align-items-center m-l-0">
-                                <div class="col-auto">
-                                    <i class="fas fa-user-graduate f-36 text-c-purple"></i>
-                                </div>
-                                <div class="col-auto">
-                                    <h6 class="text-muted m-b-10">Student</h6>
-                                    <h2 class="m-b-0">45</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row align-items-center m-l-0">
-                                <div class="col-auto">
-                                    <i class="fas fa-users f-36 text-c-red"></i>
-                                </div>
-                                <div class="col-auto">
-                                    <h6 class="text-muted m-b-10">Parents</h6>
-                                    <h2 class="m-b-0">9</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row align-items-center m-l-0">
-                                <div class="col-auto">
-                                    <i class="fas fa-user-tie f-36 text-c-green"></i>
-                                </div>
-                                <div class="col-auto">
-                                    <h6 class="text-muted m-b-10">Teacher</h6>
-                                    <h2 class="m-b-0">5</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row align-items-center m-l-0">
-                                <div class="col-auto">
-                                    <i class="fas fa-book-open f-36 text-c-blue"></i>
-                                </div>
-                                <div class="col-auto">
-                                    <h6 class="text-muted m-b-10">Subject</h6>
-                                    <h2 class="m-b-0">25</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- customar project  end -->
-                <!-- subscribe start -->
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5>Account summary</h5>
-                        </div>
-                        <div class="card-body">
-                            <div id="summary-chart"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5>Event List </h5>
-                        </div>
-                        <div class="card-body">
-                            <div id='Eventcalendar' class='calendar'></div>
-                        </div>
-                    </div>
-                </div>
-                <!-- subscribe end -->
-            </div>
-            {{-- <div class="row">
-                <div class="col-lg-7 col-md-12">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="card support-bar overflow-hidden">
-                                <div class="card-body pb-0">
-                                    <h2 class="m-0">350</h2>
-                                    <span class="text-c-blue">Support Requests</span>
-                                    <p class="mb-3 mt-3">Total number of support requests that come in.</p>
-                                </div>
-                                <div id="support-chart"></div>
-                                <div class="card-footer bg-primary text-white">
-                                    <div class="row text-center">
-                                        <div class="col">
-                                            <h4 class="m-0 text-white">10</h4>
-                                            <span>Open</span>
-                                        </div>
-                                        <div class="col">
-                                            <h4 class="m-0 text-white">5</h4>
-                                            <span>Running</span>
-                                        </div>
-                                        <div class="col">
-                                            <h4 class="m-0 text-white">3</h4>
-                                            <span>Solved</span>
-                                        </div>
+            @if (Auth::user()->id_role == 5)
+                <div class="row">
+                    <!-- customar project  start -->
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row align-items-center m-l-0">
+                                    <div class="col-auto">
+                                        <i class="fas fa-user-graduate f-36 text-c-purple"></i>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="card support-bar overflow-hidden">
-                                <div class="card-body pb-0">
-                                    <h2 class="m-0">350</h2>
-                                    <span class="text-c-green">Support Requests</span>
-                                    <p class="mb-3 mt-3">Total number of support requests that come in.</p>
-                                </div>
-                                <div id="support-chart1"></div>
-                                <div class="card-footer bg-success text-white">
-                                    <div class="row text-center">
-                                        <div class="col">
-                                            <h4 class="m-0 text-white">10</h4>
-                                            <span>Open</span>
-                                        </div>
-                                        <div class="col">
-                                            <h4 class="m-0 text-white">5</h4>
-                                            <span>Running</span>
-                                        </div>
-                                        <div class="col">
-                                            <h4 class="m-0 text-white">3</h4>
-                                            <span>Solved</span>
-                                        </div>
+                                    <div class="col-auto">
+                                        <h6 class="text-muted m-b-10">Student</h6>
+                                        <h2 class="m-b-0">45</h2>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-5 col-md-12">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-8">
-                                            <h4 class="text-c-yellow">$30200</h4>
-                                            <h6 class="text-muted m-b-0">All Earnings</h6>
-                                        </div>
-                                        <div class="col-4 text-right">
-                                            <i class="feather icon-bar-chart-2 f-28"></i>
-                                        </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row align-items-center m-l-0">
+                                    <div class="col-auto">
+                                        <i class="fas fa-users f-36 text-c-red"></i>
                                     </div>
-                                </div>
-                                <div class="card-footer bg-c-yellow">
-                                    <div class="row align-items-center">
-                                        <div class="col-9">
-                                            <p class="text-white m-b-0">% change</p>
-                                        </div>
-                                        <div class="col-3 text-right">
-                                            <i class="feather icon-trending-up text-white f-16"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-8">
-                                            <h4 class="text-c-green">290+</h4>
-                                            <h6 class="text-muted m-b-0">Page Views</h6>
-                                        </div>
-                                        <div class="col-4 text-right">
-                                            <i class="feather icon-file-text f-28"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-footer bg-c-green">
-                                    <div class="row align-items-center">
-                                        <div class="col-9">
-                                            <p class="text-white m-b-0">% change</p>
-                                        </div>
-                                        <div class="col-3 text-right">
-                                            <i class="feather icon-trending-up text-white f-16"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-8">
-                                            <h4 class="text-c-red">145</h4>
-                                            <h6 class="text-muted m-b-0">Task</h6>
-                                        </div>
-                                        <div class="col-4 text-right">
-                                            <i class="feather icon-calendar f-28"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-footer bg-c-red">
-                                    <div class="row align-items-center">
-                                        <div class="col-9">
-                                            <p class="text-white m-b-0">% change</p>
-                                        </div>
-                                        <div class="col-3 text-right">
-                                            <i class="feather icon-trending-down text-white f-16"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-8">
-                                            <h4 class="text-c-blue">500</h4>
-                                            <h6 class="text-muted m-b-0">Downloads</h6>
-                                        </div>
-                                        <div class="col-4 text-right">
-                                            <i class="feather icon-thumbs-down f-28"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-footer bg-c-blue">
-                                    <div class="row align-items-center">
-                                        <div class="col-9">
-                                            <p class="text-white m-b-0">% change</p>
-                                        </div>
-                                        <div class="col-3 text-right">
-                                            <i class="feather icon-trending-down text-white f-16"></i>
-                                        </div>
+                                    <div class="col-auto">
+                                        <h6 class="text-muted m-b-10">Parents</h6>
+                                        <h2 class="m-b-0">9</h2>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-4 col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col-6">
-                                    <h3>$16,756</h3>
-                                    <h6 class="text-muted m-b-0">Visits<i class="fa fa-caret-down text-c-red m-l-10"></i>
-                                    </h6>
-                                </div>
-                                <div class="col-6">
-                                    <div id="seo-chart1" class="d-flex align-items-end"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col-6">
-                                    <h3>49.54%</h3>
-                                    <h6 class="text-muted m-b-0">Bounce Rate<i
-                                            class="fa fa-caret-up text-c-green m-l-10"></i></h6>
-                                </div>
-                                <div class="col-6">
-                                    <div id="seo-chart2" class="d-flex align-items-end"></div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row align-items-center m-l-0">
+                                    <div class="col-auto">
+                                        <i class="fas fa-user-tie f-36 text-c-green"></i>
+                                    </div>
+                                    <div class="col-auto">
+                                        <h6 class="text-muted m-b-10">Teacher</h6>
+                                        <h2 class="m-b-0">5</h2>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-4 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col-6">
-                                    <h3>1,62,564</h3>
-                                    <h6 class="text-muted m-b-0">Products<i
-                                            class="fa fa-caret-down text-c-red m-l-10"></i></h6>
-                                </div>
-                                <div class="col-6">
-                                    <div id="seo-chart3" class="d-flex align-items-end"></div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row align-items-center m-l-0">
+                                    <div class="col-auto">
+                                        <i class="fas fa-book-open f-36 text-c-blue"></i>
+                                    </div>
+                                    <div class="col-auto">
+                                        <h6 class="text-muted m-b-10">Subject</h6>
+                                        <h2 class="m-b-0">25</h2>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- customar project  end -->
+                    <!-- subscribe start -->
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Account summary</h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="summary-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Event List </h5>
+                            </div>
+                            <div class="card-body">
+                                <div id='Eventcalendar' class='calendar'></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- subscribe end -->
                 </div>
-            </div> --}}
+            @endif
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
@@ -392,11 +184,21 @@
                                                             <td>{{ $tugas->Level->level }}</td>
                                                             <td>{{ $tugas->Status->status }}</td>
                                                             <td>
-                                                                <a href="{{ route('penugasan.show', $tugas->id) }}">
-                                                                    <button class="btn btn-primary">
-                                                                        <i class="feather icon-eye"></i>
-                                                                    </button>
-                                                                </a>
+                                                                @if (Auth::user()->id_role == 5)
+                                                                    <a href="{{ route('penugasan.show', $tugas->id) }}">
+                                                                        <button class="btn btn-primary">
+                                                                            <i class="feather icon-eye"></i>
+                                                                        </button>
+                                                                    </a>
+                                                                @endif
+                                                                @if (Auth::user()->id_role == 1)
+                                                                    <a
+                                                                        href="{{ route('penugasan.show', $tugas->id_penugasans) }}">
+                                                                        <button class="btn btn-primary">
+                                                                            <i class="feather icon-eye"></i>
+                                                                        </button>
+                                                                    </a>
+                                                                @endif
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -414,9 +216,9 @@
     </div>
 @section('jsTambahan')
     <script src="https://ableproadmin.com/bootstrap/default/assets/js/plugins/moment.js"></script>
-    <script src="https://ableproadmin.com/bootstrap/default/assets/js/plugins/jquery-ui.min.js"></script>
+    {{-- <script src="https://ableproadmin.com/bootstrap/default/assets/js/plugins/jquery-ui.min.js"></script> --}}
     <script src="https://ableproadmin.com/bootstrap/default/assets/js/plugins/fullcalendar.min.js"></script>
-    <script src="https://ableproadmin.com/bootstrap/default/assets/js/plugins/apexcharts.min.js"></script>
+    {{-- <script src="https://ableproadmin.com/bootstrap/default/assets/js/plugins/apexcharts.min.js"></script> --}}
     <script>
         // [ operation-processed ] start
         $(function() {

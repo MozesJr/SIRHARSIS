@@ -12,7 +12,7 @@ class LevelController extends Controller
     public function index()
     {
         $title = 'Level Urgency';
-        $dataLevel = Level::all();
+        $dataLevel = Level::where('id_ext', 1)->get();
 
         return view('level.index', [
             'title' => $title,
@@ -20,16 +20,19 @@ class LevelController extends Controller
         ]);
     }
 
-    public function create()
-    {
-        //
-    }
-
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'level' => ['required', 'string', 'unique:levels', 'max:255'],
-        ]);
+        $cek = Level::where('level', $request->status)->where('id_ext', 1)->first();
+
+        if ($cek != NULL) {
+            $validator = Validator::make($request->all(), [
+                'level' => ['required', 'string', 'unique:levels', 'max:255'],
+            ]);
+        } else {
+            $validator = Validator::make($request->all(), [
+                'level' => ['required', 'string', 'max:255'],
+            ]);
+        }
 
         if ($validator->fails()) {
             Alert::toast('Gagal Menyimpan, cek kembali inputan anda', 'error');
@@ -38,20 +41,11 @@ class LevelController extends Controller
 
         Level::create([
             'level' => $request->level,
+            'id_ext' => 1,
         ]);
 
         Alert::success('Berhasil', 'Data Level telah ditambahkan');
         return redirect()->route('level.index');
-    }
-
-    public function show(Level $level)
-    {
-        //
-    }
-
-    public function edit(Level $level)
-    {
-        //
     }
 
     public function update(Request $request, $id)
@@ -77,15 +71,11 @@ class LevelController extends Controller
 
         $data = [
             'level' => $level->level,
+            'id_ext' => 1,
         ];
 
         Level::where('id', $id)->update($data);
         Alert::success('Berhasil', 'Data Level berhasil diubah');
         return back();
-    }
-
-    public function destroy(Level $level)
-    {
-        //
     }
 }

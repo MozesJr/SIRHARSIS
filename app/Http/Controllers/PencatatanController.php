@@ -15,7 +15,12 @@ class PencatatanController extends Controller
     public function index()
     {
         $title = 'Pencatatan';
-        $pencatatan = Pencatatan::all();
+
+        if (Auth::user()->id_role == 5) {
+            $pencatatan = Pencatatan::all();
+        } else {
+            $pencatatan = Pencatatan::where('id_users', Auth::user()->id)->get();
+        }
 
         return view('pencatatan.index', [
             'title' => $title,
@@ -35,20 +40,32 @@ class PencatatanController extends Controller
     public function store(Request $request)
     {
 
-        $validator = Validator::make($request->all(), [
-            'judul' => ['required', 'string', 'unique:pencatatans', 'max:255'],
-            'isi' => ['required', 'string'],
-            'tanggal' => ['required'],
-            'image' => ['required', 'file', 'mimes:jpeg,png,jpg,gif,svg', 'max:1024'],
-        ]);
+        if ($request->image == NULL) {
+            $validator = Validator::make($request->all(), [
+                'judul' => ['required', 'string', 'unique:pencatatans', 'max:255'],
+                'isi' => ['required', 'string'],
+                'tanggal' => ['required'],
+            ]);
+        } else {
+            $validator = Validator::make($request->all(), [
+                'judul' => ['required', 'string', 'unique:pencatatans', 'max:255'],
+                'isi' => ['required', 'string'],
+                'tanggal' => ['required'],
+                'image' => ['required', 'file', 'mimes:jpeg,png,jpg,gif,svg', 'max:1024'],
+            ]);
+        }
 
         if ($validator->fails()) {
             Alert::toast('Gagal Menyimpan, cek kembali inputan anda', 'error');
             return back()->withErrors($validator)->withInput();
         }
 
-        if ($request->file('image')) {
-            $gambar = $request->file('image')->store('pencatatan-images');
+        if ($request->image != NULL) {
+            if ($request->file('image')) {
+                $gambar = $request->file('image')->store('pencatatan-images');
+            }
+        } else {
+            $gambar = NULL;
         }
 
         $idUser = Auth::user()->id;
@@ -75,7 +92,11 @@ class PencatatanController extends Controller
     public function show($id)
     {
         $title = 'Pencatatan Show';
-        $dataPencatatan = Pencatatan::find($id);
+        if (Auth::user()->id_role == 5) {
+            $dataPencatatan = Pencatatan::find($id);
+        } else {
+            $dataPencatatan = Pencatatan::where('id', $id)->where('id_users', Auth::user()->id)->first();
+        }
 
         return view('pencatatan.read', [
             'title' => $title,
@@ -111,6 +132,14 @@ class PencatatanController extends Controller
     {
         $pencatatan = Pencatatan::find($id);
 
+        if ($request->image == NULL) {
+            $rule = [
+                'judul' => ['required', 'string', 'unique:pencatatans', 'max:255'],
+                'isi' => ['required', 'string'],
+                'tanggal' => ['required'],
+            ];
+        }
+
         if ($request->oldImage == $request->image) {
             $rule = [
                 'judul' => ['required', 'string', 'unique:pencatatans', 'max:255'],
@@ -125,6 +154,7 @@ class PencatatanController extends Controller
                 'image' => ['required', 'file', 'mimes:jpeg,png,jpg,gif,svg', 'max:1024'],
             ];
         }
+
         if ($pencatatan->judul != $request->judul) {
             $validator = Validator::make(
                 $request->all(),
@@ -140,6 +170,14 @@ class PencatatanController extends Controller
             }
 
             $pencatatan->judul = $request->judul;
+        }
+
+        if ($request->image != NULL) {
+            if ($request->file('image')) {
+                $gambar = $request->file('image')->store('pencatatan-images');
+            }
+        } else {
+            $gambar = NULL;
         }
 
         if ($request->oldImage != $request->image) {
@@ -175,7 +213,11 @@ class PencatatanController extends Controller
     public function destroy($id)
     {
         $gambar = Pencatatan::find($id);
-        Storage::delete($gambar->gambar);
+
+        if ($gambar->gambar != NULL) {
+            Storage::delete($gambar->gambar);
+        }
+
         Pencatatan::findOrFail($id)->delete();
         Alert::success('Data Pencatatan berhasil dihapus', 'success');
         return redirect()->route('pencatatan.index');

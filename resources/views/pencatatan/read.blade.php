@@ -20,26 +20,39 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-sm-4">
                     <div class="card">
                         <div class="card-header">
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <h4>{{ $pencatatan->judul }}</h4>
-                                </div>
+                            <h4>Gambar</h4>
+                        </div>
+                        <div class="card-body">
+                            @if ($pencatatan->gambar != null)
+                                <center>
+                                    <img class="img-preview img-fluid mb-3 col-sm-12 card-img-top"
+                                        src="{{ asset('storage/' . $pencatatan->gambar) }}" alt="Gambar1">
+                                </center>
+                            @else
+                                <center>
+                                    <img class="img-preview img-fluid mb-3 col-sm-12 card-img-top"
+                                        src="{{ asset('assets/images/work.jpg') }}" alt="Gambar">
+                                </center>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="col-md-9">
+                                <h4>{{ $pencatatan->judul }}</h4>
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="col-md-12 col-xl-12">
-                                <img class="img-fluid card-img-top" src="{{ asset('storage/' . $pencatatan->gambar) }}"
-                                    alt="Card image cap">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $pencatatan->judul }}</h5>
-                                    <p class="card-text">{!! $pencatatan->catatan !!}</p>
-                                    <p class="card-text"><small class="text-muted">{{ $pencatatan->tanggal }}</small>
-                                    </p>
-                                </div>
-                            </div>
+                            <p class="card-text">{!! $pencatatan->catatan !!}</p>
+                            <hr>
+                            <p class="card-text"><small class="text-muted">{{ $pencatatan->tanggal }} |
+                                    {{ $pencatatan->User->name }}</small>
+                            </p>
                         </div>
                         <div class="card-footer">
                             <a onclick="return confirm('Apakah Anda Yakin Menghapus Data ini?');">

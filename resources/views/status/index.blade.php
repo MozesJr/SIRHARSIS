@@ -10,12 +10,12 @@
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <div class="page-header-title">
-                                <h5 class="m-b-10">Status Penugasan</h5>
+                                <h5 class="m-b-10">{{ $title }}</h5>
                             </div>
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i
                                             class="feather icon-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="#!">Status Penugasan</a></li>
+                                <li class="breadcrumb-item"><a href="#!">{{ $title }}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -27,7 +27,7 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-md-9">
-                                    <h4>Daftar Status Penugasan</h4>
+                                    <h4>Daftar {{ $title }}</h4>
                                 </div>
                                 <div class="col-md-3">
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -82,48 +82,87 @@
                                                                             <div class="modal-header">
                                                                                 <h5 class="modal-title"
                                                                                     id="staticBackdropLabel">Ubah Data
-                                                                                    status
-                                                                                    Urgency</h5>
+                                                                                    {{ $title }}</h5>
                                                                                 <button type="button" class="btn-close"
                                                                                     data-bs-dismiss="modal"
                                                                                     aria-label="Close">
                                                                                     <i class="feather icon-x"></i>
                                                                                 </button>
                                                                             </div>
-                                                                            <div class="modal-body">
-                                                                                <div class="col-md-12">
-                                                                                    <form method="POST"
-                                                                                        action="{{ route('status.update', $sts->id) }}">
-                                                                                        @csrf
-                                                                                        @method('PUT')
-                                                                                        <div class="form-group fill">
-                                                                                            <label class="form-label"
-                                                                                                for="status">Status</label>
-                                                                                            <input type="text"
-                                                                                                class="form-control"
-                                                                                                id="status"
-                                                                                                placeholder="Status Penugasan"
-                                                                                                name="status"
-                                                                                                value="{{ old('status', $sts->status) }}"
-                                                                                                required>
-                                                                                            @error('status')
-                                                                                                <span id="category_id-error"
-                                                                                                    class="error text-danger"
-                                                                                                    for="input-id"
-                                                                                                    style="display: block;">{{ $message }}</span>
-                                                                                            @enderror
-                                                                                        </div>
+                                                                            @if ($title == 'Status Penugasan')
+                                                                                <div class="modal-body">
+                                                                                    <div class="col-md-12">
+                                                                                        <form method="POST"
+                                                                                            action="{{ route('status.update', $sts->id) }}">
+                                                                                            @csrf
+                                                                                            @method('PUT')
+                                                                                            <div class="form-group fill">
+                                                                                                <label class="form-label"
+                                                                                                    for="status">Status
+                                                                                                    Penugasan</label>
+                                                                                                <input type="text"
+                                                                                                    class="form-control"
+                                                                                                    id="status"
+                                                                                                    placeholder="{{ $title }}"
+                                                                                                    name="status"
+                                                                                                    value="{{ old('status', $sts->status) }}"
+                                                                                                    required>
+                                                                                                @error('status')
+                                                                                                    <span id="category_id-error"
+                                                                                                        class="error text-danger"
+                                                                                                        for="input-id"
+                                                                                                        style="display: block;">{{ $message }}</span>
+                                                                                                @enderror
+                                                                                            </div>
+                                                                                    </div>
                                                                                 </div>
-                                                                            </div>
-                                                                            <div class="modal-footer">
-                                                                                <button type="button"
-                                                                                    class="btn btn-secondary"
-                                                                                    data-bs-dismiss="modal">Close</button>
-                                                                                <button type="sumbit"
-                                                                                    class="btn btn-primary">Ubah
-                                                                                    Data</button>
-                                                                                </form>
-                                                                            </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button"
+                                                                                        class="btn btn-secondary"
+                                                                                        data-bs-dismiss="modal">Close</button>
+                                                                                    <button type="sumbit"
+                                                                                        class="btn btn-primary">Ubah
+                                                                                        Data</button>
+                                                                                    </form>
+                                                                                </div>
+                                                                            @else
+                                                                                <div class="modal-body">
+                                                                                    <div class="col-md-12">
+                                                                                        <form method="POST"
+                                                                                            action="{{ route('stsSvr.update', $sts->id) }}">
+                                                                                            @csrf
+                                                                                            @method('PUT')
+                                                                                            <div class="form-group fill">
+                                                                                                <label class="form-label"
+                                                                                                    for="status">Status
+                                                                                                    Penugasan</label>
+                                                                                                <input type="text"
+                                                                                                    class="form-control"
+                                                                                                    id="status"
+                                                                                                    placeholder="{{ $title }}"
+                                                                                                    name="status"
+                                                                                                    value="{{ old('status', $sts->status) }}"
+                                                                                                    required>
+                                                                                                @error('status')
+                                                                                                    <span
+                                                                                                        id="category_id-error"
+                                                                                                        class="error text-danger"
+                                                                                                        for="input-id"
+                                                                                                        style="display: block;">{{ $message }}</span>
+                                                                                                @enderror
+                                                                                            </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button"
+                                                                                        class="btn btn-secondary"
+                                                                                        data-bs-dismiss="modal">Close</button>
+                                                                                    <button type="sumbit"
+                                                                                        class="btn btn-primary">Ubah
+                                                                                        Data</button>
+                                                                                    </form>
+                                                                                </div>
+                                                                            @endif
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -148,31 +187,56 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Tambah Data Status Penugasan</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Tambah Data {{ $title }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <i class="feather icon-x"></i>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <div class="col-md-12">
-                        <form method="POST" action="{{ route('status.store') }}">
-                            @csrf
-                            <div class="form-group fill">
-                                <label class="form-label" for="status">Status</label>
-                                <input type="text" class="form-control" id="status" placeholder="Status Penugasan"
-                                    name="status" value="{{ old('status') }}" required>
-                                @error('status')
-                                    <span id="category_id-error" class="error text-danger" for="input-id"
-                                        style="display: block;">{{ $message }}</span>
-                                @enderror
-                            </div>
+                @if ($title == 'Status Penugasan')
+                    <div class="modal-body">
+                        <div class="col-md-12">
+                            <form method="POST" action="{{ route('status.store') }}">
+                                @csrf
+                                <div class="form-group fill">
+                                    <label class="form-label" for="status">Status Penugasan</label>
+                                    <input type="text" class="form-control" id="status"
+                                        placeholder="{{ $title }}" name="status" value="{{ old('status') }}"
+                                        required>
+                                    @error('status')
+                                        <span id="category_id-error" class="error text-danger" for="input-id"
+                                            style="display: block;">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="sumbit" class="btn btn-primary">Tambah Data</button>
-                    </form>
-                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="sumbit" class="btn btn-primary">Tambah Data</button>
+                        </form>
+                    </div>
+                @else
+                    <div class="modal-body">
+                        <div class="col-md-12">
+                            <form method="POST" action="{{ route('stsSvr.store') }}">
+                                @csrf
+                                <div class="form-group fill">
+                                    <label class="form-label" for="status">Status Server</label>
+                                    <input type="text" class="form-control" id="status"
+                                        placeholder="{{ $title }}" name="status" value="{{ old('status') }}"
+                                        required>
+                                    @error('status')
+                                        <span id="category_id-error" class="error text-danger" for="input-id"
+                                            style="display: block;">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="sumbit" class="btn btn-primary">Tambah Data</button>
+                        </form>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

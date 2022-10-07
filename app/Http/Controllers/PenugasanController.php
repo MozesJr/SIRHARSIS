@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Level;
 use App\Models\Penugasan;
 use App\Models\Status;
+use App\Models\Tugas;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -17,7 +19,14 @@ class PenugasanController extends Controller
     public function index()
     {
         $title = 'Penugasan';
-        $penugasan = Penugasan::all();
+
+        if (Auth::user()->id_role == 5) {
+            $penugasan = Penugasan::all();
+        } else {
+            $penugasan = Penugasan::join('tugas', 'tugas.id_penugasans', '=', 'penugasans.id')->join('users', 'users.id', '=', 'tugas.id_users1')->where('tugas.id_users1', Auth::user()->id)->get();
+        }
+
+        // dd($penugasan);
 
         return view('penugasan.index', [
             'title' => $title,
@@ -30,11 +39,13 @@ class PenugasanController extends Controller
         $title = 'Penugasan Create';
         $level = Level::all();
         $status = Status::all();
-
+        $user = User::where('id_role', 1)->get();
+        // dd($user);
         return view('penugasan.create', [
             'title' => $title,
             'level' => $level,
-            'status' => $status
+            'status' => $status,
+            'user' => $user,
         ]);
     }
 
@@ -58,6 +69,19 @@ class PenugasanController extends Controller
             $gambar = $request->file('image')->store('penugasan-images');
         }
 
+        $tujuan = $request->tujuan;
+
+        $ulang = count($tujuan);
+
+        $id = count(Penugasan::all());
+
+        for ($i = 0; $i < $ulang; $i++) {
+            Tugas::create([
+                'id_penugasans' => $id + 1,
+                'id_users1' => $tujuan[$i],
+            ]);
+        }
+
         $idStatus = 1;
         $idUser = Auth::user()->id;
         $excrept = Str::limit(strip_tags($request->isi), 50);
@@ -66,6 +90,7 @@ class PenugasanController extends Controller
             'penugasan' => $request->isi,
             'gambar' => $gambar,
             'excerpt' => $excrept,
+            'tujuan' => $tujuan,
             'daterange' => $request->daterange,
             'id_users' => $idUser,
             'id_statuses' => $idStatus,
@@ -79,11 +104,28 @@ class PenugasanController extends Controller
     public function show($id)
     {
         $title = 'Penugasan Show';
-        $dataPenugasan = Penugasan::find($id);
+
+        $penugasanOld = Penugasan::find($id);
+        if (Auth::user()->id_role == 1 && $penugasanOld->id_statuses == 1) {
+            $idStatus = 2;
+            $data = [
+                'id_statuses' => $idStatus,
+            ];
+            Penugasan::where('id', $id)->update($data);
+        }
+
+        if (Auth::user()->id_role == 5) {
+            $penugasan = Penugasan::find($id);
+        } else {
+            $penugasan = Penugasan::join('tugas', 'tugas.id_penugasans', '=', 'penugasans.id')->join('users', 'users.id', '=', 'tugas.id_users1')->where('penugasans.id', $id)->where('tugas.id_users1', Auth::user()->id)->first();
+        }
+
+        $dataUser = Penugasan::join('tugas', 'tugas.id_penugasans', '=', 'penugasans.id')->join('users', 'users.id', '=', 'tugas.id_users1')->where('penugasans.id', $id)->get();
 
         return view('penugasan.read', [
             'title' => $title,
-            'penugasan' => $dataPenugasan,
+            'penugasan' => $penugasan,
+            'dataUser' => $dataUser
         ]);
     }
 
@@ -95,14 +137,34 @@ class PenugasanController extends Controller
      */
     public function edit($id)
     {
+
+        if (Auth::user()->id_role == 1) {
+            $idStatus = 3;
+            $data = [
+                'id_statuses' => $idStatus,
+            ];
+            Penugasan::where('id', $id)->update($data);
+            $penugasan = Penugasan::find($id);
+            Alert::success('Berhasil', 'Selamat Anda Sudah Menyelesaikan Tugas ' . $penugasan->judul);
+            return redirect()->route('penugasan.index');
+        }
+
         $title = 'Penugasan Update';
         $dataPenugasan = Penugasan::find($id);
         $level = Level::all();
+        $status = Status::all();
+        $user = User::where('id_role', 1)->get();
+
+        // dd($dataPenugasan);
+        $dataUser = Tugas::join('penugasans', 'penugasans.id', '=', 'tugas.id_penugasans')->join('users', 'users.id', '=', 'tugas.id_users1')->where('tugas.id_penugasans', $id)->get();
 
         return view('penugasan.edit', [
             'title' => $title,
             'penugasan' => $dataPenugasan,
             'level' => $level,
+            'user' => $user,
+            'dataUser' => $dataUser,
+            'status' => $status
         ]);
     }
 
@@ -158,9 +220,28 @@ class PenugasanController extends Controller
             $gambar = $request->oldImage;
         }
 
+        $ulang1 = Tugas::where('id_penugasans', $id)->get();
+        $hapus = count($ulang1);
+
+        for ($i = 0; $i < $hapus; $i++) {
+            Tugas::where('id_penugasans', $id)->delete();
+        }
+
+        $tujuan = $request->tujuan;
+        $ulang = count($tujuan);
+
+        for ($i = 0; $i < $ulang; $i++) {
+            Tugas::create([
+                'id_penugasans' => $id,
+                'id_users1' => $tujuan[$i],
+            ]);
+        }
+
         $idUser = Auth::user()->id;
         $excrept = Str::limit(strip_tags($request->isi), 50);
-        $idStatus = 1;
+
+        $idStatus = $request->status;
+
         $data = [
             'judul' => $penugasan->judul,
             'penugasan' => $request->isi,

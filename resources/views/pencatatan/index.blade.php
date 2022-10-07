@@ -60,6 +60,13 @@
                                                             rowspan="1" colspan="1"
                                                             aria-label="Tanggal: activate to sort column ascending">Tanggal
                                                         </th>
+                                                        @if (Auth::user()->id_role == 5)
+                                                            <th class="sorting" tabindex="0" aria-controls="simpletable"
+                                                                rowspan="1" colspan="1"
+                                                                aria-label="Oleh: activate to sort column ascending">
+                                                                Oleh
+                                                            </th>
+                                                        @endif
                                                         <th class="sorting" tabindex="0" aria-controls="simpletable"
                                                             rowspan="1" colspan="1"
                                                             aria-label="Action: activate to sort column ascending">Action
@@ -72,7 +79,11 @@
                                                             <td class="sorting_1">{{ $loop->iteration }}</td>
                                                             <td>{{ $pct->judul }}</td>
                                                             <td>{{ $pct->excerpt }}</td>
-                                                            <td>{{ $pct->tanggal }}</td>
+                                                            <td>{{ Carbon\Carbon::parse($pct->tanggal)->isoFormat('dddd, D MMMM Y') }}
+                                                            </td>
+                                                            @if (Auth::user()->id_role == 5)
+                                                                <td>{{ $pct->User->name }} | {{ $pct->User->username }}</td>
+                                                            @endif
                                                             <td>
                                                                 <a href="{{ route('pencatatan.show', $pct->id) }}">
                                                                     <button class="btn btn-primary">

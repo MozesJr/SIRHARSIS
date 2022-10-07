@@ -16,15 +16,43 @@ class StatusSeeder extends Seeder
     public function run()
     {
         Status::insert([
-            'status' => 'On Proses'
+            'status' => 'Open',
+            'id_ext' => 1,
         ]);
 
         Status::insert([
-            'status' => 'Success'
+            'status' => 'On Proses',
+            'id_ext' => 1,
         ]);
 
         Status::insert([
-            'status' => 'Non Success'
+            'status' => 'Success',
+            'id_ext' => 1,
+        ]);
+
+        Status::insert([
+            'status' => 'Non Success',
+            'id_ext' => 1,
+        ]);
+
+        Status::insert([
+            'status' => 'Closed',
+            'id_ext' => 1,
+        ]);
+
+        Status::insert([
+            'status' => 'Active',
+            'id_ext' => 2,
+        ]);
+
+        Status::insert([
+            'status' => 'Pending',
+            'id_ext' => 2,
+        ]);
+
+        Status::insert([
+            'status' => 'Inactive',
+            'id_ext' => 2,
         ]);
     }
 }

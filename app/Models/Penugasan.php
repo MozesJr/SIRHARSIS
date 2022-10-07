@@ -35,4 +35,9 @@ class Penugasan extends Model
         return \Carbon\Carbon::parse($this->attributes['tanggal_akhir'])
             ->diffForHumans();
     }
+
+    public function Job()
+    {
+        return $this->belongsTo(Job::class, 'id_job');
+    }
 }

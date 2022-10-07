@@ -48,7 +48,6 @@
                                         <td class="text-end">{{ Carbon\Carbon::parse($pecah)->isoFormat('dddd, D MMMM Y') }}
                                         </td>
                                     </tr>
-
                                     <tr>
                                         <td><i class="far fa-credit-card m-r-5"></i> Deadline:</td>
                                         @php
@@ -68,6 +67,16 @@
                                         <td><i class="fas fa-user-plus m-r-5"></i> Added by:</td>
                                         <td class="text-end">{{ $penugasan->User->name }}</td>
                                     </tr>
+                                    @if (Auth::user()->id_role == 5)
+                                        <tr>
+                                            <td><i class="fas fa-users m-r-5"></i> Worked by:</td>
+                                            <td class="text-end">
+                                                @foreach ($dataUser as $d)
+                                                    {{ $d->name }} <br>
+                                                @endforeach
+                                            </td>
+                                        </tr>
+                                    @endif
                                     <tr>
                                         <td><i class="fas fa-thermometer-half m-r-5"></i> Status:</td>
                                         <td class="text-end">{{ $penugasan->Status->status }}</td>
@@ -76,20 +85,29 @@
                             </table>
                         </div>
                         <div class="card-footer">
-                            <a onclick="return confirm('Apakah Anda Yakin Menghapus Data ini?');">
-                                <form action="{{ route('penugasan.destroy', $penugasan->id) }}" method="POST">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="btn btn-danger block mr-2" style="float: right">
-                                        <i class="feather icon-delete"></i>
+                            @if (Auth::user()->id_role == 5)
+                                <a onclick="return confirm('Apakah Anda Yakin Menghapus Data ini?');">
+                                    <form action="{{ route('penugasan.destroy', $penugasan->id) }}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-danger block mr-2" style="float: right">
+                                            <i class="feather icon-delete"></i>
+                                        </button>
+                                    </form>
+                                </a>
+                                <a href="{{ route('penugasan.edit', $penugasan->id) }}">
+                                    <button class="btn btn-warning mr-2" style="float: right"><i
+                                            class="feather icon-settings"></i>
                                     </button>
-                                </form>
-                            </a>
-                            <a href="{{ route('penugasan.edit', $penugasan->id) }}">
-                                <button class="btn btn-warning mr-2" style="float: right"><i
-                                        class="feather icon-settings"></i>
-                                </button>
-                            </a>
+                                </a>
+                            @endif
+                            @if (Auth::user()->id_role == 1 && $penugasan->id_statuses == 2)
+                                <a href="{{ route('penugasan.edit', $penugasan->id) }}" id="sts">
+                                    <button class="btn btn-success mr-2" style="float: right"><i
+                                            class="feather icon-check"></i>
+                                    </button>
+                                </a>
+                            @endif
                             <a href="{{ route('penugasan.index') }}">
                                 <button class="btn btn-primary mr-2" style="float: right">
                                     <i class="feather icon-arrow-left"></i>

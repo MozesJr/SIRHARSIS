@@ -9,4 +9,9 @@ class Pencatatan extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    public function User()
+    {
+        return $this->belongsTo(User::class, 'id_users');
+    }
 }

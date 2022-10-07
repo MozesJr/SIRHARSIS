@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('daterange');
             $table->string('gambar')->nullable();
             $table->text('excerpt');
-            $table->string('tujuan')->nullable();
             $table->foreignId('id_levels');
             $table->foreignId('id_users');
             $table->foreignId('id_statuses')->nullable();

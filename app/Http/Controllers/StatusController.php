@@ -12,7 +12,7 @@ class StatusController extends Controller
     public function index()
     {
         $title = 'Status Penugasan';
-        $dataStatus = Status::all();
+        $dataStatus = Status::where('id_ext', 1)->get();
 
         return view('status.index', [
             'title' => $title,
@@ -22,9 +22,17 @@ class StatusController extends Controller
 
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'status' => ['required', 'string', 'unique:statuses', 'max:255'],
-        ]);
+        $cek = Status::where('status', $request->status)->where('id_ext', 1)->first();
+
+        if ($cek != NULL) {
+            $validator = Validator::make($request->all(), [
+                'status' => ['required', 'string', 'unique:statuses', 'max:255'],
+            ]);
+        } else {
+            $validator = Validator::make($request->all(), [
+                'status' => ['required', 'string', 'max:255'],
+            ]);
+        }
 
         if ($validator->fails()) {
             Alert::toast('Gagal Menyimpan, cek kembali inputan anda', 'error');
@@ -33,6 +41,7 @@ class StatusController extends Controller
 
         Status::create([
             'status' => $request->status,
+            'id_ext' => 1,
         ]);
 
         Alert::success('Berhasil', 'Data status telah ditambahkan');
@@ -62,6 +71,7 @@ class StatusController extends Controller
 
         $data = [
             'status' => $status->status,
+            'id_ext' => 1,
         ];
 
         Status::where('id', $id)->update($data);

@@ -8,6 +8,7 @@
         }
     </style>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link rel="stylesheet" href="https://ableproadmin.com/bootstrap/default/assets/css/plugins/select2.min.css">
 @endsection
 @section('content')
     <div class="pcoded-main-container">
@@ -55,37 +56,17 @@
                                         @enderror
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <label class="form-label" for="tanggal_awal">Pilih Tanggal</label>
                                             <input type="text" name="daterange" class="form-control"
                                                 value="{{ $penugasan->daterange }}" />
                                         </div>
-                                        {{-- <div class="col-md-4">
-                                            <div class="form-group fill">
-                                                <label class="form-label" for="tanggal_awal">Tanggal Awal</label>
-                                                <input type="date" class="form-control" id="tanggal_awal"
-                                                    placeholder="Tanggal Mulai Kegiatan" name="tanggal_awal">
-                                                @error('tanggal_awal')
-                                                    <span id="category_id-error" class="error text-danger" for="input-id"
-                                                        style="display: block;">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                        </div>
                                         <div class="col-md-4">
-                                            <div class="form-group fill">
-                                                <label class="form-label" for="tanggal_akhir">Tanggal Akhir</label>
-                                                <input type="date" class="form-control" id="tanggal_akhir"
-                                                    placeholder="Tanggal akhir Kegiatan" name="tanggal_akhir">
-                                                @error('tanggal_akhir')
-                                                    <span id="category_id-error" class="error text-danger" for="input-id"
-                                                        style="display: block;">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                        </div> --}}
-                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="level">Level Urgency</label>
                                                 <select class="form-control" id="level" name="level">
+                                                    <option value="{{ $penugasan->id_levels }}">
+                                                        {{ $penugasan->Level->level }}</option>
                                                     @foreach ($level as $lvl)
                                                         <option value="{{ $lvl->id }}">{{ $lvl->level }}</option>
                                                     @endforeach
@@ -96,6 +77,41 @@
                                                 @enderror
                                             </div>
                                         </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="status">Status</label>
+                                                <select class="form-control" id="status" name="status">
+                                                    <option value="{{ $penugasan->id_statuses }}">
+                                                        {{ $penugasan->Status->status }}</option>
+                                                    @foreach ($status as $sts)
+                                                        <option value="{{ $sts->id }}">{{ $sts->status }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('status')
+                                                    <span id="category_id-error" class="error text-danger" for="input-id"
+                                                        style="display: block;">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group fill">
+                                        <label class="form-label" for="judul">Tujuan Penugasan</label>
+                                        <select class="form-control js-example-basic-hide-search" multiple="multiple"
+                                            name="tujuan[]">
+                                            @foreach ($dataUser as $usr1)
+                                                <option value="{{ $usr1->id_users1 }}" selected>{{ $usr1->name }}
+                                                </option>
+                                            @endforeach
+                                            @foreach ($user as $usr)
+                                                <optgroup label="{{ $usr->Job->job }}">
+                                                    <option value="{{ $usr->id }}">{{ $usr->name }}</option>
+                                                </optgroup>
+                                            @endforeach
+                                        </select>
+                                        @error('tujuan')
+                                            <span id="category_id-error" class="error text-danger" for="input-id"
+                                                style="display: block;">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <div class="mb-3">
@@ -106,8 +122,8 @@
                                             @else
                                                 <img class="img-preview img-fluid mb-3 col-sm-5">
                                             @endif
-                                            <input class="form-control @error('image') is-invalid @enderror" type="file"
-                                                id="image" name="image" onchange="previewImage()">
+                                            <input class="form-control @error('image') is-invalid @enderror"
+                                                type="file" id="image" name="image" onchange="previewImage()">
                                         </div>
                                         @error('image')
                                             <span id="category_id-error" class="error text-danger" for="input-id"
@@ -169,4 +185,9 @@
     {{-- <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script> --}}
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+    <!-- select2 Js -->
+    <script src="https://ableproadmin.com/bootstrap/default/assets/js/plugins/select2.full.min.js"></script>
+    <!-- form-select-custom Js -->
+    <script src="https://ableproadmin.com/bootstrap/default/assets/js/pages/form-select-custom.js"></script>
 @endsection

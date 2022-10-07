@@ -16,19 +16,33 @@ class LevelSeeder extends Seeder
     public function run()
     {
         Level::insert([
-            'level' => 'Low Priority'
+            'level' => 'Low Priority',
+            'id_ext' => 1,
         ]);
 
         Level::insert([
-            'level' => 'Medium Priority'
+            'level' => 'Medium Priority',
+            'id_ext' => 1,
         ]);
 
         Level::insert([
-            'level' => 'High Priority'
+            'level' => 'High Priority',
+            'id_ext' => 1,
         ]);
 
         Level::insert([
-            'level' => 'Very High Priority'
+            'level' => 'Very High Priority',
+            'id_ext' => 1,
+        ]);
+
+        Level::insert([
+            'level' => 'Core',
+            'id_ext' => 2,
+        ]);
+
+        Level::insert([
+            'level' => 'Non Core',
+            'id_ext' => 2,
         ]);
     }
 }

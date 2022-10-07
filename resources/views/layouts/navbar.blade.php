@@ -54,10 +54,16 @@
                 <li class="nav-item pcoded-menu-caption">
                     <label>Pencatatan</label>
                 </li>
-                <li class="nav-item {{ request()->routeIs('pencatatan*') ? 'active' : '' }}">
-                    <a href="{{ route('pencatatan.index') }}" class="nav-link"><span class="pcoded-micon"><i
-                                class="feather icon-file-text"></i></span><span
-                            class="pcoded-mtext">Pencatatan</span></a>
+                <li
+                    class="nav-item pcoded-hasmenu {{ request()->routeIs('pencatatan*') | request()->routeIs('servers*') ? 'active' : '' }}">
+                    <a href="#!" class="nav-link"><span class="pcoded-micon"><i
+                                class="feather icon-box"></i></span><span class="pcoded-mtext">Pencatatan</span></a>
+                    <ul class="pcoded-submenu">
+                        <li class="{{ request()->routeIs('pencatatan*') ? 'active' : '' }}"><a
+                                href="{{ route('pencatatan.index') }}">Catatan Kerjaan</a></li>
+                        <li class="{{ request()->routeIs('servers*') ? 'active' : '' }}"><a
+                                href="{{ route('servers.index') }}">Catatan Server</a></li>
+                    </ul>
                 </li>
                 <li class="nav-item pcoded-menu-caption">
                     <label>Penugasan</label>
@@ -80,14 +86,23 @@
                             <li class="{{ request()->routeIs('level*') ? 'active' : '' }}">
                                 <a href="{{ route('level.index') }}">Level Urgency</a>
                             </li>
-                            <li class="request()->routeIs('status*')">
+                            <li class="{{ request()->routeIs('lvlSvr*') ? 'active' : '' }}">
+                                <a href="{{ route('lvlSvr.index') }}">Level Server</a>
+                            </li>
+                            <li class="{{ request()->routeIs('status*') ? 'active' : '' }}">
                                 <a href="{{ route('status.index') }}">Status Penugasan</a>
                             </li>
-                            <li class="request()->routeIs('job*')">
+                            <li class="{{ request()->routeIs('stsSvr*') ? 'active' : '' }}">
+                                <a href="{{ route('stsSvr.index') }}">Status Server</a>
+                            </li>
+                            <li class="{{ request()->routeIs('job*') ? 'active' : '' }}">
                                 <a href="{{ route('job.index') }}">Job Description</a>
                             </li>
-                            <li class="request()->routeIs('role*')">
+                            <li class="{{ request()->routeIs('role*') ? 'active' : '' }}">
                                 <a href="{{ route('role.index') }}">Role</a>
+                            </li>
+                            <li class="{{ request()->routeIs('ext*') ? 'active' : '' }}">
+                                <a href="{{ route('ext.index') }}">Software</a>
                             </li>
                         </ul>
                     </li>

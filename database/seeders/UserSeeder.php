@@ -24,5 +24,14 @@ class UserSeeder extends Seeder
             'id_role' => 5,
             'id_job' => 1,
         ]);
+
+        User::insert([
+            'name' => 'Mozes Sapari',
+            'email' => 'mozessapari11@gmail.com',
+            'password' => Hash::make('123123'),
+            'username' => 'm.sapari',
+            'id_role' => 1,
+            'id_job' => 1,
+        ]);
     }
 }
