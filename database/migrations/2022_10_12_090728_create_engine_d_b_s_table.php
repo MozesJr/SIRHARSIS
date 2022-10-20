@@ -13,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('ket_servers', function (Blueprint $table) {
+        Schema::create('engine_d_b_s', function (Blueprint $table) {
             $table->id();
-            $table->text('ket')->nullable();
-            $table->string('dns')->nullable();
-            $table->foreignId('id_ext')->nullable();
-            $table->string('ndb')->nullable();
-            $table->foreignId('id_servers')->nullable();
-            $table->foreignId('id_userss')->nullable();
+            $table->string('engine');
             $table->timestamps();
         });
     }
@@ -32,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ket_servers');
+        Schema::dropIfExists('engine_d_b_s');
     }
 };

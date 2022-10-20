@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_servers', function (Blueprint $table) {
+        Schema::create('harians', function (Blueprint $table) {
             $table->id();
-            $table->string('akses')->nullable();
-            $table->string('username')->nullable();
-            $table->string('password')->nullable();
-            $table->foreignId('id_ket_servers')->nullable();
-            $table->foreignId('id_users')->nullable();
+            $table->string('jobHarian');
+            $table->string('value');
+            $table->string('tanggal');
+            $table->string('waktu');
+            $table->foreignId('id_server');
+            $table->foreignId('id_ketCatServer');
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_servers');
+        Schema::dropIfExists('harians');
     }
 };

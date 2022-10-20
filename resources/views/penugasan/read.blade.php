@@ -102,7 +102,7 @@
                                 </a>
                             @endif
                             @if (Auth::user()->id_role == 1 && $penugasan->id_statuses == 2)
-                                <a href="{{ route('penugasan.edit', $penugasan->id) }}" id="sts">
+                                <a href="{{ route('penugasan.edit', $penugasan->id_penugasans) }}" id="sts">
                                     <button class="btn btn-success mr-2" style="float: right"><i
                                             class="feather icon-check"></i>
                                     </button>
@@ -146,9 +146,9 @@
     </section>
 @endsection
 @php
-$string = $penugasan->daterange;
-$pecah2 = substr($string, -10);
-$timer = json_encode(Carbon\Carbon::parse($pecah2)->format('M d, Y'));
+    $string = $penugasan->daterange;
+    $pecah2 = substr($string, -10);
+    $timer = json_encode(Carbon\Carbon::parse($pecah2)->format('M d, Y'));
 @endphp
 @section('jsTambahan')
     <script>

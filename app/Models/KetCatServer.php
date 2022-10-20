@@ -5,8 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Hardware extends Model
+class KetCatServer extends Model
 {
     use HasFactory;
-    protected $guarded = ['id'];
 }

@@ -41,8 +41,8 @@
                                         data-bs-target="#staticBackdrop" style="float: right">
                                         <i class="feather icon-plus"></i> Add Data
                                     </button>
-                                    <button type="button" class="btn btn-success mr-2" style="float: right"><i
-                                            class="feather icon-printer"></i> Export</button>
+                                    <a href="{{ route('exportServer') }}" class="btn btn-success mr-2"
+                                        style="float: right"><i class="feather icon-printer"></i> Export</a>
                                 </div>
                             </div>
                         </div>
@@ -91,7 +91,7 @@
                                 </div>
                                 <div class="text-center">
                                     <a href="{{ route('servers.show', $srv->id) }}">
-                                        <h4 class="mb-1 mt-3">{{ $srv->name }}</h4>
+                                        <h4 class="mb-1 mt-3">{{ $srv->nameServer }}</h4>
                                     </a>
                                     <p class="mb-3 text-muted"><i class="feather icon-calendar"></i>
                                         {{ Carbon\Carbon::parse($srv->created_at)->isoFormat('dddd, D MMMM Y') }}
@@ -129,11 +129,12 @@
                     <div class="col-md-12">
                         <form method="POST" action="{{ route('servers.store') }}">
                             @csrf
+                            <input type="hidden" name="reqS" value="no1">
                             <div class="form-group fill">
                                 <label class="form-label" for="name">Nama Server / Web</label>
                                 <input type="text" class="form-control" id="name" placeholder="Data Server"
-                                    name="name" value="{{ old('name') }}" required>
-                                @error('name')
+                                    name="nameServer" value="{{ old('name') }}" required>
+                                @error('nameServer')
                                     <span id="category_id-error" class="error text-danger" for="input-id"
                                         style="display: block;">{{ $message }}</span>
                                 @enderror

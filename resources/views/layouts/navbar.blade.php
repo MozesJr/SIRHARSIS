@@ -73,6 +73,11 @@
                                 class="feather icon-file-text"></i></span><span
                             class="pcoded-mtext">Penugasan</span></a>
                 </li>
+                <li class="nav-item {{ request()->routeIs('harian*') ? 'active' : '' }}">
+                    <a href="{{ route('harian.index') }}" class="nav-link"><span class="pcoded-micon"><i
+                                class="feather icon-file-text"></i></span><span class="pcoded-mtext">Tugas
+                            Harian</span></a>
+                </li>
                 @if (Auth::user()->Role->role == 'Super Admin')
                     <li class="nav-item pcoded-menu-caption">
                         <label>Data Master</label>
@@ -101,8 +106,8 @@
                             <li class="{{ request()->routeIs('role*') ? 'active' : '' }}">
                                 <a href="{{ route('role.index') }}">Role</a>
                             </li>
-                            <li class="{{ request()->routeIs('ext*') ? 'active' : '' }}">
-                                <a href="{{ route('ext.index') }}">Software</a>
+                            <li class="{{ request()->routeIs('engine*') ? 'active' : '' }}">
+                                <a href="{{ route('engine.index') }}">Engine</a>
                             </li>
                         </ul>
                     </li>

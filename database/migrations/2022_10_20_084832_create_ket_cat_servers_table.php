@@ -13,11 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('software', function (Blueprint $table) {
+        Schema::create('ket_cat_servers', function (Blueprint $table) {
             $table->id();
-            $table->string('nameS')->nullable();
-            $table->text('ketS')->nullable();
-            $table->foreignId('id_ketServers')->nullable();
+            $table->string('catatan');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('software');
+        Schema::dropIfExists('ket_cat_servers');
     }
 };

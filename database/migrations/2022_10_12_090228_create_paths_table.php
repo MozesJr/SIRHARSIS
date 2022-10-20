@@ -13,11 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('hardware', function (Blueprint $table) {
+        Schema::create('paths', function (Blueprint $table) {
             $table->id();
-            $table->string('nameH')->nullable();
-            $table->text('ketH')->nullable();
-            $table->foreignId('id_ketServers')->nullable();
+            $table->string('path');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hardware');
+        Schema::dropIfExists('paths');
     }
 };

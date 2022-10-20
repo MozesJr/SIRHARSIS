@@ -1,7 +1,10 @@
 <?php
 
+use App\Exports\ServerExportController;
 use App\Http\Controllers\CatatanController;
+use App\Http\Controllers\EngineController;
 use App\Http\Controllers\ExtController;
+use App\Http\Controllers\HarianController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\KetServerController;
@@ -41,7 +44,7 @@ Route::group(['middleware' => ['auth', 'checkRole:5']], function () {
     Route::resource('role', RoleController::class);
     Route::resource('job', JobController::class);
     Route::resource('users', UserController::class);
-    Route::resource('ext', ExtController::class);
+    Route::resource('engine', EngineController::class);
 });
 
 Route::group(['middleware' => ['auth', 'checkRole:5,1']], function () {
@@ -50,8 +53,11 @@ Route::group(['middleware' => ['auth', 'checkRole:5,1']], function () {
     Route::resource('penugasan', PenugasanController::class);
     Route::resource('users', UserController::class)->only('show', 'edit');
     Route::resource('servers', ServerController::class);
+    Route::get('/server/showServer/{id}', [ServerController::class, 'showServer'])->name('showServer');
+    Route::get('/exportServers', [ServerController::class, 'exportExcel'])->name('exportServer');
     Route::resource('spekServer', SpekServerController::class);
     Route::resource('ketServer', KetServerController::class);
+    Route::resource('harian', HarianController::class);
 });
 
 require __DIR__ . '/auth.php';

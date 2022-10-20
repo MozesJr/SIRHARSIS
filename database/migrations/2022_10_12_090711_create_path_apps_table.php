@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('exts', function (Blueprint $table) {
+        Schema::create('path_apps', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('id_ext')->nullable();
+            $table->string('path');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('exts');
+        Schema::dropIfExists('path_apps');
     }
 };

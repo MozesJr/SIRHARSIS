@@ -120,6 +120,8 @@ class PenugasanController extends Controller
             $penugasan = Penugasan::join('tugas', 'tugas.id_penugasans', '=', 'penugasans.id')->join('users', 'users.id', '=', 'tugas.id_users1')->where('penugasans.id', $id)->where('tugas.id_users1', Auth::user()->id)->first();
         }
 
+        // dd($penugasan);
+
         $dataUser = Penugasan::join('tugas', 'tugas.id_penugasans', '=', 'penugasans.id')->join('users', 'users.id', '=', 'tugas.id_users1')->where('penugasans.id', $id)->get();
 
         return view('penugasan.read', [
@@ -145,6 +147,7 @@ class PenugasanController extends Controller
             ];
             Penugasan::where('id', $id)->update($data);
             $penugasan = Penugasan::find($id);
+            // dd($penugasan);
             Alert::success('Berhasil', 'Selamat Anda Sudah Menyelesaikan Tugas ' . $penugasan->judul);
             return redirect()->route('penugasan.index');
         }
