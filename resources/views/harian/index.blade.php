@@ -28,12 +28,11 @@
                                         <i class="fas fa-laptop-code f-36 text-c-purple"></i>
                                     </div>
                                     <div class="col-auto">
-                                        <a href="">
+                                        <a href="{{ route('harian.show', $server->id) }}">
                                             <h6 class="text-muted m-b-10">{{ $server->nameServer }}
                                             </h6>
                                             <h6 class="text-muted m-b-10">{{ $server->ketServer }}
                                             </h6>
-                                            <h2 class="m-b-0">0 / 3</h2>
                                         </a>
                                     </div>
                                 </div>

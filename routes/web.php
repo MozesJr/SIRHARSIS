@@ -58,6 +58,7 @@ Route::group(['middleware' => ['auth', 'checkRole:5,1']], function () {
     Route::resource('spekServer', SpekServerController::class);
     Route::resource('ketServer', KetServerController::class);
     Route::resource('harian', HarianController::class);
+    Route::get('exportHarianId/{id}', [HarianController::class, 'exportHarianId'])->name('exportHarianId');
 });
 
 require __DIR__ . '/auth.php';

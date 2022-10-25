@@ -180,9 +180,16 @@
                                                         <label class="col-sm-3 col-form-label font-weight-bolder">Path
                                                             Akses </label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" class="form-control"
-                                                                placeholder="Path Akses.."
-                                                                value="{{ $dataServer->Path->path }}" name="pathAkses">
+                                                            @if ($dataServer->id_pathAkses != null)
+                                                                <input type="text" class="form-control"
+                                                                    placeholder="Path Akses.."
+                                                                    value="{{ $dataServer->Path->path }}"
+                                                                    name="pathAkses">
+                                                            @else
+                                                                <input type="text" class="form-control"
+                                                                    placeholder="Path Akses.." name="pathAkses">
+                                                            @endif
+
                                                         </div>
                                                         @error('pathAkses')
                                                             <span id="category_id-error" class="error text-danger"

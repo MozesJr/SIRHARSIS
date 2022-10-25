@@ -15,12 +15,17 @@ return new class extends Migration
     {
         Schema::create('harians', function (Blueprint $table) {
             $table->id();
-            $table->string('jobHarian');
-            $table->string('value');
+            $table->string('koneksi');
+            $table->string('service');
+            $table->string('tampilan');
+            $table->string('ram');
+            $table->string('hardisk');
+            $table->string('pengunjung');
             $table->string('tanggal');
             $table->string('waktu');
+            $table->string('gambar');
             $table->foreignId('id_server');
-            $table->foreignId('id_ketCatServer');
+            $table->foreignId('id_users');
             $table->timestamps();
         });
     }
