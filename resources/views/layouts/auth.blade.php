@@ -12,6 +12,7 @@
     <meta name="author" content="MozesJR" />
     <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon" />
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/background.css') }}" />
 </head>
 
 @yield('auth')

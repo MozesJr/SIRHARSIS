@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Home;
+use App\Models\Server;
+use App\Models\User;
+use App\Models\Harian;
+use App\Models\Pencatatan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -15,9 +20,17 @@ class HomeController extends Controller
     public function index()
     {
         $title = 'Home';
+        $user = count(User::all());
+        $server = count(Server::all());
+        $dataHarian = count(Harian::where('id_users', Auth::user()->id)->get());
+        $dataPencatatan = count(Pencatatan::where('id_users', Auth::user()->id)->get());
 
         return view('home.index', [
             'title' => $title,
+            'dataUser' => $user,
+            'dataServer' => $server,
+            'dataHarian' => $dataHarian,
+            'dataPencatatan' => $dataPencatatan,
         ]);
     }
 

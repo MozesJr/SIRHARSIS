@@ -1,9 +1,6 @@
 <?php
 
-use App\Exports\ServerExportController;
-use App\Http\Controllers\CatatanController;
 use App\Http\Controllers\EngineController;
-use App\Http\Controllers\ExtController;
 use App\Http\Controllers\HarianController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JobController;
@@ -16,8 +13,8 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ServerController;
 use App\Http\Controllers\SpekServerController;
 use App\Http\Controllers\StatusController;
-use App\Http\Controllers\Statuss;
 use App\Http\Controllers\StatussController;
+use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -58,7 +55,11 @@ Route::group(['middleware' => ['auth', 'checkRole:5,1']], function () {
     Route::resource('spekServer', SpekServerController::class);
     Route::resource('ketServer', KetServerController::class);
     Route::resource('harian', HarianController::class);
+    Route::post('/harian/upload', [HarianController::class, 'storeMedia'])->name('harian.upload');
     Route::get('exportHarianId/{id}', [HarianController::class, 'exportHarianId'])->name('exportHarianId');
+
+    Route::post('/upload', [UploadController::class, 'uploadDropzoneFile'])->name('front.upload');
+    Route::post('/file-destroy', [UploadController::class, 'destroyFile'])->name('front.file-destroy');
 });
 
 require __DIR__ . '/auth.php';

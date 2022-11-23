@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string('pengunjung');
             $table->string('tanggal');
             $table->string('waktu');
-            $table->string('gambar');
             $table->foreignId('id_server');
             $table->foreignId('id_users');
             $table->timestamps();

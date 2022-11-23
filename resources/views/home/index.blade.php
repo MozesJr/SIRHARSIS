@@ -7,19 +7,19 @@
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <div class="page-header-title">
-                                <h5 class="m-b-10">Dashboard Analytics</h5>
+                                <h5 class="m-b-10">Dashboard</h5>
                             </div>
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i
                                             class="feather icon-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="#!">Dashboard Analytics</a></li>
+                                <li class="breadcrumb-item"><a href="#!">Dashboard</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-7 col-md-12">
+                {{-- <div class="col-lg-7 col-md-12">
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="card support-bar overflow-hidden">
@@ -74,41 +74,35 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-5 col-md-12">
+                </div> --}}
+                <div class="col-lg-12 col-md-12">
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-3">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-8">
-                                            <h4 class="text-c-yellow">$30200</h4>
-                                            <h6 class="text-muted m-b-0">All Earnings</h6>
+                                            <h4 class="text-c-yellow">{{ $dataUser }}</h4>
+                                            <h6 class="text-muted m-b-0">Total User</h6>
                                         </div>
                                         <div class="col-4 text-right">
-                                            <i class="feather icon-bar-chart-2 f-28"></i>
+                                            <i class="feather icon-user f-28"></i>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-footer bg-c-yellow">
                                     <div class="row align-items-center">
-                                        <div class="col-9">
-                                            <p class="text-white m-b-0">% change</p>
-                                        </div>
-                                        <div class="col-3 text-right">
-                                            <i class="feather icon-trending-up text-white f-16"></i>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-3">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-8">
-                                            <h4 class="text-c-green">290+</h4>
-                                            <h6 class="text-muted m-b-0">Page Views</h6>
+                                            <h4 class="text-c-green">{{ $dataServer }}</h4>
+                                            <h6 class="text-muted m-b-0">Catatan Server</h6>
                                         </div>
                                         <div class="col-4 text-right">
                                             <i class="feather icon-file-text f-28"></i>
@@ -117,23 +111,17 @@
                                 </div>
                                 <div class="card-footer bg-c-green">
                                     <div class="row align-items-center">
-                                        <div class="col-9">
-                                            <p class="text-white m-b-0">% change</p>
-                                        </div>
-                                        <div class="col-3 text-right">
-                                            <i class="feather icon-trending-up text-white f-16"></i>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-3">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-8">
-                                            <h4 class="text-c-red">145</h4>
-                                            <h6 class="text-muted m-b-0">Task</h6>
+                                            <h4 class="text-c-red">{{ $dataHarian }}</h4>
+                                            <h6 class="text-muted m-b-0">Tugas Harian</h6>
                                         </div>
                                         <div class="col-4 text-right">
                                             <i class="feather icon-calendar f-28"></i>
@@ -142,44 +130,32 @@
                                 </div>
                                 <div class="card-footer bg-c-red">
                                     <div class="row align-items-center">
-                                        <div class="col-9">
-                                            <p class="text-white m-b-0">% change</p>
-                                        </div>
-                                        <div class="col-3 text-right">
-                                            <i class="feather icon-trending-down text-white f-16"></i>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-3">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-8">
-                                            <h4 class="text-c-blue">500</h4>
-                                            <h6 class="text-muted m-b-0">Downloads</h6>
+                                            <h4 class="text-c-blue">{{ $dataPencatatan }}</h4>
+                                            <h6 class="text-muted m-b-0">Catatan Kerjaan</h6>
                                         </div>
                                         <div class="col-4 text-right">
-                                            <i class="feather icon-thumbs-down f-28"></i>
+                                            <i class="feather icon-file-text f-28"></i>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-footer bg-c-blue">
                                     <div class="row align-items-center">
-                                        <div class="col-9">
-                                            <p class="text-white m-b-0">% change</p>
-                                        </div>
-                                        <div class="col-3 text-right">
-                                            <i class="feather icon-trending-down text-white f-16"></i>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-6 col-md-12">
+                {{-- <div class="col-xl-6 col-md-12">
                     <div class="card table-card">
                         <div class="card-header">
                             <h5>Projects</h5>
@@ -324,8 +300,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-6 col-md-12">
+                </div> --}}
+                {{-- <div class="col-xl-6 col-md-12">
                     <div class="card latest-update-card">
                         <div class="card-header">
                             <h5>Latest Updates</h5>
@@ -413,8 +389,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-4 col-md-12">
+                </div> --}}
+                {{-- <div class="col-xl-4 col-md-12">
                     <div class="card">
                         <div class="card-body">
                             <div class="row align-items-center">
@@ -452,8 +428,8 @@
                             <div class="row align-items-center">
                                 <div class="col-6">
                                     <h3>1,62,564</h3>
-                                    <h6 class="text-muted m-b-0">Products<i
-                                            class="fa fa-caret-down text-c-red m-l-10"></i></h6>
+                                    <h6 class="text-muted m-b-0">Products<i class="fa fa-caret-down text-c-red m-l-10"></i>
+                                    </h6>
                                 </div>
                                 <div class="col-6">
                                     <div id="seo-chart3" class="d-flex align-items-end"></div>
@@ -461,8 +437,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-8 col-md-12">
+                </div> --}}
+                {{-- <div class="col-lg-8 col-md-12">
                     <div class="card table-card review-card">
                         <div class="card-header borderless ">
                             <h5>Customer Reviews</h5>
@@ -696,6 +672,58 @@
                             </div>
                         </div>
                         <button class="btn btn-success btn-block">Download Overall Report</button>
+                    </div>
+                </div> --}}
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <h4>List Catatan Harian</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="dt-responsive table-responsive">
+                                <div id="simpletable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table id="simpletable"
+                                                class="table table-striped table-bordered nowrap dataTable"
+                                                aria-describedby="simpletable_info">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="sorting sorting_asc" tabindex="0"
+                                                            aria-controls="simpletable" rowspan="1" colspan="1"
+                                                            aria-sort="ascending"
+                                                            aria-label="#: activate to sort column descending">
+                                                            #</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="simpletable"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Subject: activate to sort column ascending">
+                                                            Subject</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="simpletable"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Pencatatan: activate to sort column ascending">
+                                                            Pencatatan</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="simpletable"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="User: activate to sort column ascending">
+                                                            User</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="simpletable"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Waktu: activate to sort column ascending">
+                                                            Waktu</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

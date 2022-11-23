@@ -337,28 +337,29 @@
                                                                                                 </div>
                                                                                             </div>
                                                                                             <div class="col-md-12">
-                                                                                                <div class="form-group">
-                                                                                                    <div class="mb-3">
-                                                                                                        <label
-                                                                                                            for="image"
-                                                                                                            class="form-label">Upload
-                                                                                                            Gambar</label>
-                                                                                                        <center>
-                                                                                                            @if ($harian->gambar)
-                                                                                                                <img src="{{ asset('storage/' . $harian->gambar) }}"
-                                                                                                                    alt=""
-                                                                                                                    class="img-preview img-fluid mb-3 col-sm-5 d-block">
-                                                                                                            @else
-                                                                                                                <img
-                                                                                                                    class="img-preview img-fluid mb-3 col-sm-5">
-                                                                                                            @endif
-                                                                                                        </center>
-                                                                                                        <input
-                                                                                                            class="form-control @error('image') is-invalid @enderror"
-                                                                                                            type="file"
-                                                                                                            id="image"
-                                                                                                            name="image"
-                                                                                                            onchange="previewImage()">
+                                                                                                <center>
+                                                                                                    <label for="image"
+                                                                                                        class="form-label">Upload
+                                                                                                        Gambar</label>
+                                                                                                </center>
+                                                                                                <div class="form-group fill"
+                                                                                                    id="dynamic">
+                                                                                                    <div class="row">
+                                                                                                        <div
+                                                                                                            class="col-md-10">
+                                                                                                            <input
+                                                                                                                class="form-control @error('image') is-invalid @enderror"
+                                                                                                                type="file"
+                                                                                                                id="image"
+                                                                                                                name="image[]">
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            class="col-md-2">
+                                                                                                            <button
+                                                                                                                type="button"
+                                                                                                                id="tambah"
+                                                                                                                class="btn btn-success">Add</button>
+                                                                                                        </div>
                                                                                                     </div>
                                                                                                     @error('image')
                                                                                                         <span
@@ -381,7 +382,6 @@
                                                                                     Data</button>
                                                                                 </form>
                                                                             </div>
-
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -485,20 +485,14 @@
                                                                                         <div class="col-md-6 mt-2">
                                                                                             : {{ $harian->User->name }}
                                                                                         </div>
-                                                                                        <div class="col-md-12 mt-2">
-                                                                                            @if ($harian->gambar != null)
-                                                                                                <center>
-                                                                                                    <img class="img-preview img-fluid mb-3 col-sm-12 card-img-top"
-                                                                                                        src="{{ asset('storage/' . $harian->gambar) }}"
-                                                                                                        alt="Gambar1">
-                                                                                                </center>
-                                                                                            @else
-                                                                                                <center>
-                                                                                                    <img class="img-preview img-fluid mb-3 col-sm-12 card-img-top"
-                                                                                                        src="{{ asset('assets/images/work.jpg') }}"
+                                                                                        <div class="col-md-12 mt-4">
+                                                                                            <center>
+                                                                                                @foreach ($gambar as $gbr)
+                                                                                                    <img class="img-preview img-fluid mb-1 col-sm-4 card-img-top"
+                                                                                                        src="{{ asset('uploads-harian/' . $gbr->original_filename) }}"
                                                                                                         alt="Gambar">
-                                                                                                </center>
-                                                                                            @endif
+                                                                                                @endforeach
+                                                                                            </center>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -634,14 +628,19 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="form-group fill">
-                                        <div class="mb-3">
-                                            <label for="image" class="form-label">Upload Gambar</label>
-                                            <center>
-                                                <img class="img-preview img-fluid mb-3 col-sm-5">
-                                            </center>
-                                            <input class="form-control @error('image') is-invalid @enderror"
-                                                type="file" id="image" name="image" onchange="previewImage()">
+                                    <center>
+                                        <label for="image" class="form-label">Upload Gambar</label>
+                                    </center>
+                                    <div class="form-group fill" id="dynamic">
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                                <input class="form-control @error('image') is-invalid @enderror"
+                                                    type="file" id="image" name="image[]">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button type="button" id="tambah"
+                                                    class="btn btn-success">Add</button>
+                                            </div>
                                         </div>
                                         @error('image')
                                             <span id="category_id-error" class="error text-danger" for="input-id"
@@ -686,5 +685,31 @@
     <script src="https://ableproadmin.com/bootstrap/default/assets/js/pages/data-basic-custom.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous">
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
+
+    <script>
+        $(document).ready(function() {
+
+            var no = 1;
+            var ni = 1;
+            $('#tambah').click(function() {
+                no++;
+                ni++;
+                $('#dynamic').append(
+                    '<div class="row mt-2" id="row' + no +
+                    '"><div class="col-md-10"><input class="form-control @error('image') is-invalid @enderror"type="file" id="image" name="image[]"></div><div class="col-md-2"><button type="button" id="' +
+                    no +
+                    '" class="btn btn-danger btn_remove">Hapus</button></div></div>'
+                );
+            });
+
+            $(document).on('click', '.btn_remove', function() {
+                var button_id = $(this).attr("id");
+                $('#row' + button_id + '').remove();
+            });
+        });
     </script>
 @endsection

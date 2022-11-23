@@ -1,6 +1,6 @@
 @extends('layouts.auth')
 @section('auth')
-    <div class="auth-wrapper">
+    <div class="auth-wrapper context hero bubbles">
         <div class="auth-content">
             <div class="card">
                 <div class="row align-items-center text-center">
@@ -10,8 +10,8 @@
                             <x-auth-validation-errors class="mb-4" :errors="$errors" />
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
-                                {{-- <img src="{{ asset('assets/images/logo-dark.png') }}" alt="" class="img-fluid mb-4"> --}}
-                                <h4 class="mb-3 f-w-400">Signin</h4>
+                                <img src="{{ asset('assets/images/LogoDepan.png') }}" alt="" class="img-fluid mb-4">
+                                {{-- <h4 class="mb-3 f-w-400">Signin</h4> --}}
                                 <div class="form-group mb-3">
                                     <label class="floating-label" for="username">User Name</label>
                                     <input type="text" class="form-control" id="username" placeholder="" name="username"
@@ -31,5 +31,37 @@
                 </div>
             </div>
         </div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
     </div>
+    <div class="area">
+        <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+    <div class="cube"></div>
+    <div class="cube"></div>
+    <div class="cube"></div>
+    <div class="cube"></div>
+    <div class="cube"></div>
+    <div class="cube"></div>
 @endsection

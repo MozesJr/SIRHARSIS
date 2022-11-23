@@ -304,13 +304,41 @@
                                                             {{ $dataServer->usDB }}
                                                         </div>
                                                     </div>
-                                                    <div class="form-group row align-items-center">
+                                                    {{-- <div class="form-group row align-items-center">
                                                         <label class="col-sm-3 col-form-label font-weight-bolder">Password
                                                             Database </label>
                                                         <div class="col-sm-9">
                                                             {{ $dataServer->psDB }}
                                                         </div>
+                                                    </div> --}}
+                                                    {{-- <div class="form-group row align-items-center">
+                                                        <label class="col-sm-3 col-form-label font-weight-bolder">Username
+                                                            Database </label>
+                                                        <div class="col-sm-9">
+                                                            <input type="password" class="form-control form-password"
+                                                                placeholder="Username.." value="{{ $dataServer->usDB }}"
+                                                                name="usDB">
+                                                        </div>
+                                                        @error('usDB')
+                                                            <span id="category_id-error" class="error text-danger"
+                                                                for="input-id"
+                                                                style="display: block;">{{ $message }}</span>
+                                                        @enderror
+                                                    </div> --}}
+                                                    <div class="form-group row align-items-center">
+                                                        <label class="col-sm-3 col-form-label font-weight-bolder">Password
+                                                            Database </label>
+                                                        <div class="col-sm-9">
+                                                            <input type="password" class="form-control form-password"
+                                                                placeholder="Password Database.."
+                                                                value="{{ $dataServer->psDB }}" disabled>
+                                                        </div>
                                                     </div>
+                                                    @if (Auth::user()->id_role == 5)
+                                                        <div class="col-sm-5 mt-2" style="float: right">
+                                                            <input type="checkbox" class="form-checkbox"> Show Password
+                                                        </div>
+                                                    @endif
                                                 </form>
                                             </div>
                                             <div class="pro-det-edit collapse " id="pro-det-edit-2">
@@ -385,7 +413,7 @@
                                                         <label class="col-sm-3 col-form-label font-weight-bolder">Password
                                                             Database </label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" class="form-control"
+                                                            <input type="password" class="form-control form-password"
                                                                 placeholder="Password Database.."
                                                                 value="{{ $dataServer->psDB }}" name="psDB">
                                                         </div>
@@ -395,6 +423,11 @@
                                                                 style="display: block;">{{ $message }}</span>
                                                         @enderror
                                                     </div>
+                                                    @if (Auth::user()->id_role == 5)
+                                                        <div class="col-sm-5 mt-2" style="float: right">
+                                                            <input type="checkbox" class="form-checkbox"> Show Password
+                                                        </div>
+                                                    @endif
                                                     <div class="form-group row align-items-center mt-2">
                                                         <label class="col-sm-3 col-form-label"></label>
                                                         <div class="col-sm-9">
@@ -445,18 +478,32 @@
                                                     </div>
                                                     <div class="form-group row align-items-center">
                                                         <label class="col-sm-3 col-form-label font-weight-bolder">Username
-                                                            Database </label>
+                                                            Aplikasi </label>
                                                         <div class="col-sm-9">
                                                             {{ $dataServer->usApp }}
                                                         </div>
                                                     </div>
-                                                    <div class="form-group row align-items-center">
+                                                    {{-- <div class="form-group row align-items-center">
                                                         <label class="col-sm-3 col-form-label font-weight-bolder">Password
-                                                            Database </label>
+                                                            Aplikasi </label>
                                                         <div class="col-sm-9">
                                                             {{ $dataServer->psApp }}
                                                         </div>
+                                                    </div> --}}
+                                                    <div class="form-group row align-items-center">
+                                                        <label class="col-sm-3 col-form-label font-weight-bolder">Password
+                                                            Aplikasi </label>
+                                                        <div class="col-sm-9">
+                                                            <input type="password" class="form-control form-password"
+                                                                placeholder="Password Database.."
+                                                                value="{{ $dataServer->psApp }}" disabled>
+                                                        </div>
                                                     </div>
+                                                    @if (Auth::user()->id_role == 5)
+                                                        <div class="col-sm-5 mt-2" style="float: right">
+                                                            <input type="checkbox" class="form-checkbox"> Show Password
+                                                        </div>
+                                                    @endif
                                                 </form>
                                             </div>
                                             <div class="pro-det-edit collapse " id="pro-det-edit-2">
@@ -539,7 +586,7 @@
                                                         <label class="col-sm-3 col-form-label font-weight-bolder">Password
                                                             Aplikasi </label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" class="form-control"
+                                                            <input type="password" class="form-control form-password"
                                                                 placeholder="Password Aplikasi.."
                                                                 value="{{ $dataServer->psApp }}" name="psApp">
                                                         </div>
@@ -549,6 +596,11 @@
                                                                 style="display: block;">{{ $message }}</span>
                                                         @enderror
                                                     </div>
+                                                    @if (Auth::user()->id_role == 5)
+                                                        <div class="col-sm-5 mt-2" style="float: right">
+                                                            <input type="checkbox" class="form-checkbox"> Show Password
+                                                        </div>
+                                                    @endif
                                                     <div class="form-group row align-items-center mt-2">
                                                         <label class="col-sm-3 col-form-label"></label>
                                                         <div class="col-sm-9">
@@ -637,14 +689,28 @@
                                                             {{ $dataServer->usServer }}
                                                         </div>
                                                     </div>
-                                                    <div class="form-group row align-items-center">
+                                                    {{-- <div class="form-group row align-items-center">
                                                         <label class="col-sm-3 col-form-label font-weight-bolder">Password
                                                             Server
                                                         </label>
                                                         <div class="col-sm-9">
                                                             {{ $dataServer->psServer }}
                                                         </div>
+                                                    </div> --}}
+                                                    <div class="form-group row align-items-center">
+                                                        <label class="col-sm-3 col-form-label font-weight-bolder">Password
+                                                            Server </label>
+                                                        <div class="col-sm-9">
+                                                            <input type="password" class="form-control form-password"
+                                                                placeholder="Password Database.."
+                                                                value="{{ $dataServer->psServer }}" disabled>
+                                                        </div>
                                                     </div>
+                                                    @if (Auth::user()->id_role == 5)
+                                                        <div class="col-sm-5 mt-2" style="float: right">
+                                                            <input type="checkbox" class="form-checkbox"> Show Password
+                                                        </div>
+                                                    @endif
                                                 </form>
                                             </div>
                                             <div class="pro-det-edit collapse " id="pro-det-edit-2">
@@ -770,7 +836,7 @@
                                                         <label class="col-sm-3 col-form-label font-weight-bolder">Password
                                                             Server</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" class="form-control"
+                                                            <input type="password" class="form-control form-password"
                                                                 placeholder="Password Server.."
                                                                 value="{{ $dataServer->psServer }}" name="psServer">
                                                         </div>
@@ -780,6 +846,11 @@
                                                                 style="display: block;">{{ $message }}</span>
                                                         @enderror
                                                     </div>
+                                                    @if (Auth::user()->id_role == 5)
+                                                        <div class="col-sm-5 mt-2" style="float: right">
+                                                            <input type="checkbox" class="form-checkbox"> Show Password
+                                                        </div>
+                                                    @endif
                                                     <div class="form-group row align-items-center mt-2">
                                                         <label class="col-sm-3 col-form-label"></label>
                                                         <div class="col-sm-9">
@@ -801,4 +872,15 @@
 @endsection
 @section('jsTambahan')
     <script src="https://ableproadmin.com/bootstrap/default/assets/js/plugins/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.form-checkbox').click(function() {
+                if ($(this).is(':checked')) {
+                    $('.form-password').attr('type', 'text');
+                } else {
+                    $('.form-password').attr('type', 'password');
+                }
+            });
+        });
+    </script>
 @endsection
