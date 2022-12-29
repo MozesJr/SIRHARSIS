@@ -28,17 +28,19 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-9 text-start">
+                            <div class="col-md-10 text-start">
                                 <h4>Data Tugas Harian {{ $server->nameServer }} |
                                     {{ $server->ketServer }}</h4>
                             </div>
-                            <div class="col-md-3">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#getTanggal" style="float: right">
-                                    <i class="feather icon-calendar"></i> Tanggal
+                            <div class="col-md-2 align-content-left">
+                                <a href="{{ route('exportPdfHarian', $server->id) }}" class="btn btn-danger mr-2"
+                                    target="_blank"><i class="fas fa-file-pdf"></i></a>
+                                <a href="{{ route('exportHarianId', $server->id) }}" class="btn btn-success mr-2"
+                                    target="_blank"><i class="fas fa-file-excel"></i></a>
+                                <button type="button" class="btn btn-primary mr-2" data-bs-toggle="modal"
+                                    data-bs-target="#tanggal">
+                                    <i class="fas fa-calendar-alt"></i>
                                 </button>
-                                <a href="#" class="btn btn-success mr-2" style="float: right"><i
-                                        class="feather icon-printer"></i> Export</a>
                             </div>
                         </div>
                     </div>
@@ -128,8 +130,8 @@
                                                                 aria-label="Tanggal: activate to sort column ascending">
                                                                 Tanggal
                                                             </th>
-                                                            <th class="sorting" tabindex="0" aria-controls="simpletable"
-                                                                rowspan="1" colspan="1"
+                                                            <th class="sorting" tabindex="0"
+                                                                aria-controls="simpletable" rowspan="1" colspan="1"
                                                                 aria-label="Action: activate to sort column ascending">
                                                                 Action
                                                             </th>
@@ -616,8 +618,8 @@
         </div>
     </div>
 @endsection
-@if (Auth::user()->id == 5)
-    <div class="modal fade" id="getTanggal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+@if (Auth::user()->id_role == 5)
+    <div class="modal fade" id="tanggal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

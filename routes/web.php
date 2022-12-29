@@ -62,6 +62,7 @@ Route::group(['middleware' => ['auth', 'checkRole:5,1']], function () {
     Route::get('/harian/update/ubahData/{id}', [HarianController::class, 'updateHarian'])->name('harian.update');
     Route::post('/harian/upload', [HarianController::class, 'storeMedia'])->name('harian.upload');
     Route::get('exportHarianId/{id}', [HarianController::class, 'exportHarianId'])->name('exportHarianId');
+    Route::get('exportPdfHarian/{id}', [HarianController::class, 'exportPdfHarian'])->name('exportPdfHarian');
 
     Route::post('/upload', [UploadController::class, 'uploadDropzoneFile'])->name('front.upload');
     Route::post('/file-destroy', [UploadController::class, 'destroyFile'])->name('front.file-destroy');

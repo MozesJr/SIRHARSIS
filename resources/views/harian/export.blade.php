@@ -1,6 +1,6 @@
 @php
     header('Content-type: application/vnd-ms-excel');
-    header('content-Disposition: attachment; filename = Pencatanan Server.xls');
+    header('content-Disposition: attachment; filename = Data Harian.xls');
 @endphp
 <!DOCTYPE html>
 <html lang="en">

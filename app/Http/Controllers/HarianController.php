@@ -269,6 +269,17 @@ class HarianController extends Controller
         ]);
     }
 
+    public function exportPdfHarian($id)
+    {
+        $server = Server::find($id);
+        $dataGfafik = Harian::select('ram', 'hardisk', 'pengunjung', 'tanggal', 'waktu')->Where('id_server', $id)->get();
+
+        return view('harian.exportPdf', [
+            'dataGrafik' => $dataGfafik,
+            'server'   => $server,
+        ]);
+    }
+
     public function addHarian($id)
     {
         $title = 'Tambah Data Harian';

@@ -117,7 +117,7 @@
                                 <div class="col-md-9">
                                     <h4>Daftar Penugasan</h4>
                                 </div>
-                                @if (Auth::user()->id == 5)
+                                @if (Auth::user()->id_role == 5)
                                     <div class="col-md-3">
                                         <a href="{{ route('penugasan.create') }}" class="btn btn-primary mr-2"
                                             style="float: right"><i class="feather icon-plus"></i> Add Data</a>
