@@ -176,6 +176,9 @@ class ServerController extends Controller
 
     public function destroy($id)
     {
+        Server::findOrFail($id)->delete();
+        Alert::success('Data Server berhasil dihapus', 'success');
+        return redirect()->back();
     }
 
 

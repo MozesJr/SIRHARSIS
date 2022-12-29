@@ -39,7 +39,7 @@ class PencatatanController extends Controller
 
     public function store(Request $request)
     {
-
+        // dd($request->all());
         if ($request->image == NULL) {
             $validator = Validator::make($request->all(), [
                 'judul' => ['required', 'string', 'unique:pencatatans', 'max:255'],

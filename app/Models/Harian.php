@@ -19,4 +19,14 @@ class Harian extends Model
     {
         return $this->belongsTo(Server::class, 'id_server');
     }
+
+    public function Backup()
+    {
+        return $this->belongsTo(DataBackup::class, 'id_backup');
+    }
+
+    public function Image()
+    {
+        return $this->belongsTo(Image::class, 'id_harian');
+    }
 }

@@ -73,17 +73,14 @@
                                                 <div class="dropdown-menu dropdown-menu-end">
                                                     <a class="dropdown-item" href="#">Tambah</a>
                                                     <a class="dropdown-item" href="#">Edit</a>
-                                                    <a class="dropdown-item"
-                                                        onclick="return confirm('Apakah Anda Yakin Menghapus Data ini?');">
-                                                        <form action="{{ route('servers.destroy', $srv->id) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            @method('delete')
-                                                            <button type="submit" class="btn btn-danger">
-                                                                Hapus
-                                                            </button>
-                                                        </form>
-                                                    </a>
+                                                    <form action="{{ route('servers.destroy', $srv->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type="submit" class="dropdown-item"
+                                                            onclick="return confirm('Apakah Anda Yakin Menghapus Data ini?');">
+                                                            Hapus
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -91,7 +88,10 @@
                                 </div>
                                 <div class="text-center">
                                     <a href="{{ route('servers.show', $srv->id) }}">
-                                        <h4 class="mb-1 mt-3">{{ $srv->nameServer }}</h4>
+                                        <h4 class="mb-1 mt-3">{{ $srv->nameServer }} @if ($srv->ketServer != null)
+                                                | {{ $srv->ketServer }}
+                                            @endif
+                                        </h4>
                                     </a>
                                     <p class="mb-3 text-muted"><i class="feather icon-calendar"></i>
                                         {{ Carbon\Carbon::parse($srv->created_at)->isoFormat('dddd, D MMMM Y') }}

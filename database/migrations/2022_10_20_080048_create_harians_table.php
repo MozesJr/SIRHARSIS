@@ -22,7 +22,9 @@ return new class extends Migration
             $table->string('hardisk');
             $table->string('pengunjung');
             $table->string('tanggal');
+            $table->string('dbService');
             $table->string('waktu');
+            $table->foreignId('id_backup');
             $table->foreignId('id_server');
             $table->foreignId('id_users');
             $table->timestamps();

@@ -25,12 +25,37 @@ class HomeController extends Controller
         $dataHarian = count(Harian::where('id_users', Auth::user()->id)->get());
         $dataPencatatan = count(Pencatatan::where('id_users', Auth::user()->id)->get());
 
+        //Egine APP
+        $Laravel = count(Server::select('id_enApp')->where('id_enApp', 1)->get());
+        $CI = count(Server::select('id_enApp')->where('id_enApp', 2)->get());
+        $Yii = count(Server::select('id_enApp')->where('id_enApp', 3)->get());
+
+        $engineApp = [$Laravel, $CI, $Yii];
+
+        //Egine DB
+        $mysql = count(Server::select('id_enDB')->where('id_enDB', 1)->get());
+        $sqlServer = count(Server::select('id_enDB')->where('id_enDB', 2)->get());
+        $oracle = count(Server::select('id_enDB')->where('id_enDB', 3)->get());
+
+        $engineDB = [$mysql, $sqlServer, $oracle];
+
+        //Bahasa Pemrograman
+        $core = count(Server::select('id_levels')->where('id_levels', 5)->get());
+        $noncore = count(Server::select('id_levels')->where('id_levels', 6)->get());
+        $levels = [$core, $noncore];
+
+        // dd($engineApp);
+
+
         return view('home.index', [
             'title' => $title,
             'dataUser' => $user,
             'dataServer' => $server,
             'dataHarian' => $dataHarian,
             'dataPencatatan' => $dataPencatatan,
+            'engineApp' => $engineApp,
+            'engineDB' => $engineDB,
+            'levels' => $levels,
         ]);
     }
 

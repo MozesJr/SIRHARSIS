@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DataBackupController;
 use App\Http\Controllers\EngineController;
 use App\Http\Controllers\HarianController;
 use App\Http\Controllers\HomeController;
@@ -42,6 +43,8 @@ Route::group(['middleware' => ['auth', 'checkRole:5']], function () {
     Route::resource('job', JobController::class);
     Route::resource('users', UserController::class);
     Route::resource('engine', EngineController::class);
+    Route::resource('backup', DataBackupController::class);
+    Route::post('/harian/getData', [HarianController::class, 'getData'])->name('harian.getData');
 });
 
 Route::group(['middleware' => ['auth', 'checkRole:5,1']], function () {
@@ -55,6 +58,8 @@ Route::group(['middleware' => ['auth', 'checkRole:5,1']], function () {
     Route::resource('spekServer', SpekServerController::class);
     Route::resource('ketServer', KetServerController::class);
     Route::resource('harian', HarianController::class);
+    Route::get('/harian/add/addData/{id}', [HarianController::class, 'addHarian'])->name('harian.add');
+    Route::get('/harian/update/ubahData/{id}', [HarianController::class, 'updateHarian'])->name('harian.update');
     Route::post('/harian/upload', [HarianController::class, 'storeMedia'])->name('harian.upload');
     Route::get('exportHarianId/{id}', [HarianController::class, 'exportHarianId'])->name('exportHarianId');
 

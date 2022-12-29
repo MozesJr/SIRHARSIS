@@ -1,3 +1,6 @@
+@section('cssTambahan')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+@endsection
 @extends('layouts.admin')
 @section('content')
     <div class="pcoded-main-container">
@@ -150,6 +153,40 @@
                                 <div class="card-footer bg-c-blue">
                                     <div class="row align-items-center">
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Engine Aplikasi</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="myChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Engine Database</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="myChart1"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Level Aplikasi</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="myChart2"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -729,4 +766,111 @@
             </div>
         </div>
     </div>
+@endsection
+@section('jsTambahan')
+    <script>
+        var ctx = document.getElementById("myChart").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ["Laravel", "CodeIgniter", "YII"],
+                datasets: [{
+                    label: '',
+                    data: [
+                        {{ $engineApp[0] }}, {{ $engineApp[1] }}, {{ $engineApp[2] }}
+                    ],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.9)',
+                        'rgba(54, 162, 235, 0.9)',
+                        'rgba(255, 206, 86, 0.9)',
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+    <script>
+        var ctx = document.getElementById("myChart1").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ["MySQL", "SQL Server", "Oracle"],
+                datasets: [{
+                    label: '',
+                    data: [
+                        {{ $engineDB[0] }}, {{ $engineDB[1] }}, {{ $engineDB[2] }}
+                    ],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.9)',
+                        'rgba(54, 162, 235, 0.9)',
+                        'rgba(255, 206, 86, 0.9)',
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+    <script>
+        var ctx = document.getElementById("myChart2").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ["Core", "Non-COre"],
+                datasets: [{
+                    label: '',
+                    data: [
+                        {{ $levels[0] }}, {{ $levels[1] }}
+                    ],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.9)',
+                        'rgba(54, 162, 235, 0.9)',
+                        'rgba(255, 206, 86, 0.9)',
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
 @endsection

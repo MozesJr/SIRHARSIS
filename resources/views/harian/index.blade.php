@@ -18,7 +18,30 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row justify-content-center">
+                @if (Auth::user()->id_role == 5)
+                    @foreach ($dataServerAdmin as $server)
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row align-items-center m-l-0">
+                                        <div class="col-auto">
+                                            <i class="fas fa-laptop-code f-36 text-c-purple"></i>
+                                        </div>
+                                        <div class="col-auto">
+                                            <a href="{{ route('harian.show', $server->id) }}">
+                                                <h6 class="text-muted m-b-10">{{ $server->nameServer }}
+                                                </h6>
+                                                <h6 class="text-muted m-b-10">{{ $server->ketServer }}
+                                                </h6>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
                 @foreach ($dataServer as $server)
                     <div class="col-xl-3 col-md-6">
                         <div class="card">

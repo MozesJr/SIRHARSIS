@@ -109,6 +109,9 @@
                             <li class="{{ request()->routeIs('engine*') ? 'active' : '' }}">
                                 <a href="{{ route('engine.index') }}">Engine</a>
                             </li>
+                            <li class="{{ request()->routeIs('backup*') ? 'active' : '' }}">
+                                <a href="{{ route('backup.index') }}">Kondisi Backup Server</a>
+                            </li>
                         </ul>
                     </li>
                 @endif
