@@ -25,6 +25,6 @@ class DatabaseSeeder extends Seeder
             DataBackupSeeder::class,
         ]);
 
-        User::factory(15)->create();
+        // User::factory(15)->create();
     }
 }
