@@ -32,9 +32,11 @@ class JobSeeder extends Seeder
         EngineDB::insert([
             'engine' => 'MySQL'
         ]);
+
         EngineDB::insert([
             'engine' => 'SQL Server'
         ]);
+
         EngineDB::insert([
             'engine' => 'Oracle'
         ]);
@@ -42,9 +44,11 @@ class JobSeeder extends Seeder
         Engine::insert([
             'engine' => 'Laravel'
         ]);
+
         Engine::insert([
             'engine' => 'CodeIgniter'
         ]);
+
         Engine::insert([
             'engine' => 'YII'
         ]);
