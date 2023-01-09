@@ -31,8 +31,8 @@
                                     @enderror
                                 </div>
                                 <button type="submit" class="btn btn-block btn-primary mb-4">Signin</button>
-                                <p class="mb-2 text-muted">Forgot password? <a href="{{ route('password.request') }}"
-                                        class="f-w-400">Reset</a></p>
+                                {{-- <p class="mb-2 text-muted">Forgot password? <a href="{{ route('password.request') }}"
+                                        class="f-w-400">Reset</a></p> --}}
                             </form>
                         </div>
                     </div>

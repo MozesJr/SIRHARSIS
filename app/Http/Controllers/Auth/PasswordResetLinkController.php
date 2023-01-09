@@ -15,7 +15,8 @@ class PasswordResetLinkController extends Controller
      */
     public function create()
     {
-        return view('login.reset');
+        // return view('login.reset');
+        return redirect()->intended('login');
     }
 
     /**
