@@ -2,7 +2,7 @@
     <div class="m-header">
         <a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
         <a href="#!" class="b-brand">
-            <img src="{{ asset('assets/images/LogoSirharsis.png') }}" alt="" class="logo" width="170px">
+            <img src="{{ asset('assets/images/Logo2.png') }}" alt="" class="logo" width="140px">
             <img src="{{ asset('assets/images/logo-icon.png') }}" alt="" class="logo-thumb">
         </a>
         <a href="#!" class="mob-toggler">
@@ -50,7 +50,8 @@
                             </a> --}}
                         </div>
                         <ul class="pro-body">
-                            <li><a href="user-profile.html" class="dropdown-item"><i class="feather icon-user"></i>
+                            <li><a href="{{ route('users.update', Auth::user()->id) }}" class="dropdown-item"><i
+                                        class="feather icon-user"></i>
                                     Profile</a></li>
                             {{-- <li>
                                 <form method="POST" action="{{ route('logout') }}">

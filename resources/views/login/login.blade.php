@@ -10,7 +10,7 @@
                             {{-- <x-auth-validation-errors class="mb-4" :errors="$errors" /> --}}
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
-                                <img src="{{ asset('assets/images/LogoDepan.png') }}" alt="" class="img-fluid mb-4">
+                                <img src="{{ asset('assets/images/Logo1.png') }}" alt="" class="img-fluid mb-4">
                                 {{-- <h4 class="mb-3 f-w-400">Signin</h4> --}}
                                 <div class="form-group mb-3">
                                     <label class="floating-label" for="username">User Name</label>
