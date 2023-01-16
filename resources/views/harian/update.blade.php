@@ -196,7 +196,7 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <a href="{{ route('harian.index') }}" class="btn btn-primary">Kembali</a>
+                            <a href="{{ route('harian.show', $server->id_server) }}" class="btn btn-primary">Kembali</a>
                             <button type="sumbit" class="btn btn-primary float-right mt-2">Ubah Data</button>
                             </form>
                         </div>
