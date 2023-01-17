@@ -60,7 +60,7 @@
                                 class="feather icon-box"></i></span><span class="pcoded-mtext">Pencatatan</span></a>
                     <ul class="pcoded-submenu">
                         <li class="{{ request()->routeIs('pencatatan*') ? 'active' : '' }}"><a
-                                href="{{ route('pencatatan.index') }}">Catatan Kerjaan</a></li>
+                                href="{{ route('pencatatan.index') }}">Catatan Pekerjaan</a></li>
                         <li class="{{ request()->routeIs('servers*') ? 'active' : '' }}"><a
                                 href="{{ route('servers.index') }}">Catatan Server</a></li>
                     </ul>

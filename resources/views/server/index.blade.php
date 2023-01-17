@@ -71,8 +71,8 @@
                                                     aria-haspopup="true" aria-expanded="false"><i
                                                         class="feather icon-more-horizontal"></i></a>
                                                 <div class="dropdown-menu dropdown-menu-end">
-                                                    <a class="dropdown-item" href="#">Tambah</a>
-                                                    <a class="dropdown-item" href="#">Edit</a>
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('showServer', $srv->id) }}">Edit</a>
                                                     <form action="{{ route('servers.destroy', $srv->id) }}" method="POST">
                                                         @csrf
                                                         @method('delete')
