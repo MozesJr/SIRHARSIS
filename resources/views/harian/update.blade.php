@@ -53,6 +53,7 @@
                                     @method('PUT')
                                     <input type="hidden" name="oldImage" value="{{ $server->gambar }}">
                                     <input type="hidden" name="image" value="{{ $server->gambar }}">
+                                    <input type="hidden" name="id" value="{{ $server->id }}">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group fill">
@@ -103,7 +104,7 @@
                                                         TIdak Normal
                                                     </option>
                                                 </select>
-                                                @error('koneksi')
+                                                @error('tampilan')
                                                     <span id="category_id-error" class="error text-danger" for="input-id"
                                                         style="display: block;">{{ $message }}</span>
                                                 @enderror

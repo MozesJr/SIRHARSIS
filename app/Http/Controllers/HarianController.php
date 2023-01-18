@@ -10,7 +10,6 @@ use App\Models\Pencatatan;
 use App\Models\ImageGallery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
@@ -159,6 +158,7 @@ class HarianController extends Controller
     {
         // dd($request->all());
         $dataHarian = Harian::find($id);
+
         if ($request->image == NULL) {
             $rule = [
                 'id' => ['required', 'string'],
@@ -204,6 +204,7 @@ class HarianController extends Controller
         $tanggal = $dataHarian->tanggal;
         $waktu = $dataHarian->waktu;
         $id_user = $dataHarian->id_users;
+        $dataServer = $dataHarian->id_server;
 
         $data = [
             'koneksi' => $request->koneksi,
@@ -214,31 +215,14 @@ class HarianController extends Controller
             'pengunjung' => $request->pengunjung,
             'tanggal' => $tanggal,
             'waktu' => $waktu,
-            'id_server' => $request->id,
+            'id_server' => $dataServer,
             'id_users' => $id_user,
         ];
 
         Harian::where('id', $id)->update($data);
 
-        $files = [];
-        foreach ($request->file('image') as $key => $file) {
-            $fileName = time() . rand(1, 99) . '.' . $file->extension();
-            $file->move(public_path('uploads-harian'), $fileName);
-            $files[]['original_filename'] = $fileName;
-        }
-
-        foreach ($files as $key => $file) {
-            $dataImage = ImageGallery::create($file);
-
-            $data = [
-                'id_harian' => $id,
-            ];
-
-            ImageGallery::where('id', $dataImage->id)->update($data);
-        }
-
         Alert::success('Berhasil', 'Data Tugas Harian telah diubah');
-        return redirect()->route('harian.show', $request->id);
+        return redirect()->route('harian.show', $dataHarian->id_server);
     }
 
     public function destroy($id)

@@ -171,7 +171,7 @@
                                                                             </button>
                                                                         </form>
                                                                     </a>
-                                                                    <a href="{{ route('harian.update', $harian->id) }}"
+                                                                    <a href="{{ route('harian.updateData', $harian->id) }}"
                                                                         class="btn btn-warning mr-2"
                                                                         style="float: right"><i
                                                                             class="feather icon-settings"></i></a>

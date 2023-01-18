@@ -59,7 +59,7 @@ Route::group(['middleware' => ['auth', 'checkRole:5,1']], function () {
     Route::resource('ketServer', KetServerController::class);
     Route::resource('harian', HarianController::class);
     Route::get('/harian/add/addData/{id}', [HarianController::class, 'addHarian'])->name('harian.add');
-    Route::get('/harian/update/ubahData/{id}', [HarianController::class, 'updateHarian'])->name('harian.update');
+    Route::get('/harian/update/ubahData/{id}', [HarianController::class, 'updateHarian'])->name('harian.updateData');
     Route::post('/harian/upload', [HarianController::class, 'storeMedia'])->name('harian.upload');
     Route::get('exportHarianId/{id}', [HarianController::class, 'exportHarianId'])->name('exportHarianId');
     Route::get('exportPdfHarian/{id}', [HarianController::class, 'exportPdfHarian'])->name('exportPdfHarian');

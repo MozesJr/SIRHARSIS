@@ -71,8 +71,12 @@
                                                     aria-haspopup="true" aria-expanded="false"><i
                                                         class="feather icon-more-horizontal"></i></a>
                                                 <div class="dropdown-menu dropdown-menu-end">
-                                                    <a class="dropdown-item"
-                                                        href="{{ route('showServer', $srv->id) }}">Edit</a>
+                                                    <button class="dropdown-item" data-bs-toggle="modal"
+                                                        data-bs-target="#staticBackdrop">
+                                                        Edit
+                                                    </button>
+                                                    {{-- <a class="dropdown-item"
+                                                        href="{{ route('showServer', $srv->id) }}">Edit</a> --}}
                                                     <form action="{{ route('servers.destroy', $srv->id) }}" method="POST">
                                                         @csrf
                                                         @method('delete')
@@ -116,6 +120,83 @@
     </div>
     <!-- Modal Tambah Data -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Tambah Data Server</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="feather icon-x"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12">
+                        <form method="POST" action="{{ route('servers.store') }}">
+                            @csrf
+                            <input type="hidden" name="reqS" value="no1">
+                            <div class="form-group fill">
+                                <label class="form-label" for="name">Nama Server / Web</label>
+                                <input type="text" class="form-control" id="name" placeholder="Data Server"
+                                    name="nameServer" value="{{ old('name') }}" required>
+                                @error('nameServer')
+                                    <span id="category_id-error" class="error text-danger" for="input-id"
+                                        style="display: block;">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group fill">
+                                        <label for="status">Status Server</label>
+                                        <select class="form-control" id="status" name="status">
+                                            @foreach ($status as $sts)
+                                                <option value="{{ $sts->id }}">{{ $sts->status }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('status')
+                                            <span id="category_id-error" class="error text-danger" for="input-id"
+                                                style="display: block;">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group fill">
+                                        <label for="level">Level Server</label>
+                                        <select class="form-control" id="level" name="level">
+                                            @foreach ($level as $lvl)
+                                                <option value="{{ $lvl->id }}">{{ $lvl->level }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('level')
+                                            <span id="category_id-error" class="error text-danger" for="input-id"
+                                                style="display: block;">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group fill">
+                                <label class="form-label" for="inputAddress2">Keterangan Server</label>
+                                <input id="x" type="hidden" name="ket" value="{{ old('ket') }}"
+                                    required>
+                                <trix-editor input="x">
+                                </trix-editor>
+                                @error('ket')
+                                    <span id="category_id-error" class="error text-danger" for="input-id"
+                                        style="display: block;">{{ $message }}</span>
+                                @enderror
+                            </div>
+                    </div>
+                </div>
+                <div class="modal-footer mt-2">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="sumbit" class="btn btn-primary">Tambah Data</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Modal Update Data --}}
+    <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
