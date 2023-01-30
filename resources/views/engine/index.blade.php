@@ -151,7 +151,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop1" style="float: right">
+                                        data-bs-target="#engineApp" style="float: right">
                                         <i class="feather icon-plus"></i> Add Data
                                     </button>
                                 </div>
@@ -191,11 +191,10 @@
                                                             <td>
                                                                 <button type="button" class="btn btn-warning"
                                                                     data-bs-toggle="modal"
-                                                                    data-bs-target="#staticBackdrop1{{ $d->id }}">
+                                                                    data-bs-target="#engineApp{{ $d->id }}">
                                                                     <i class="feather icon-settings"></i>
                                                                 </button>
-                                                                <div class="modal fade"
-                                                                    id="staticBackdrop1{{ $d->id }}"
+                                                                <div class="modal fade" id="engineApp{{ $d->id }}"
                                                                     data-bs-backdrop="static" data-bs-keyboard="false"
                                                                     tabindex="-1" aria-labelledby="staticBackdropLabel"
                                                                     aria-hidden="true">
@@ -303,7 +302,7 @@
     </div>
 
     <!-- Modal Tambah Data -->
-    <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <div class="modal fade" id="engineApp" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
