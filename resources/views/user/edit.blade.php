@@ -33,6 +33,8 @@
                                     @method('PUT')
                                     <input type="hidden" name="oldImage" value="{{ $dataUser->gambar }}">
                                     <input type="hidden" name="image" value="{{ $dataUser->gambar }}">
+                                    <input type="hidden" name="id_role" value="{{ Auth::user()->id_role }}">
+                                    <input type="hidden" name="id_job" value="{{ Auth::user()->id_job }}">
                                     <div class="form-group">
                                         <div class="mb-3">
                                             <label for="image" class="form-label">Upload Gambar</label>

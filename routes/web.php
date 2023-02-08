@@ -51,7 +51,8 @@ Route::group(['middleware' => ['auth', 'checkRole:5,1']], function () {
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
     Route::resource('pencatatan', PencatatanController::class);
     Route::resource('penugasan', PenugasanController::class);
-    Route::resource('users', UserController::class)->only('show', 'edit');
+    // Route::resource('users', UserController::class)->only('show', 'edit');
+    Route::resource('users', UserController::class);
     Route::resource('servers', ServerController::class);
     Route::get('/server/showServer/{id}', [ServerController::class, 'showServer'])->name('showServer');
     Route::get('/exportServers', [ServerController::class, 'exportExcel'])->name('exportServer');

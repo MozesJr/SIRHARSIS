@@ -159,7 +159,7 @@ class UserController extends Controller
             // dd($request->all());
 
             if ($request->oldImage == NULL) {
-                $gambar = $request->file('image')->store('users-images');
+                $gambar = 'men.jpg';
             } else if ($request->oldImage != $request->image) {
                 Storage::delete($request->oldImage);
                 $gambar = $request->file('image')->store('users-images');
@@ -171,8 +171,8 @@ class UserController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'username' => $request->username,
-                'id_role' => $request->role,
-                'id_job' => $request->job,
+                'id_role' => $request->id_role,
+                'id_job' => $request->id_job,
                 'gambar' => $gambar
             ];
 
