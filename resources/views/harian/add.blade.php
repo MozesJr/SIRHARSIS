@@ -121,24 +121,26 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group fill">
-                                                <label class="form-label" for="pengunjung">Cek Pengunjung</label>
-                                                <i class="feather icon-info" data-toggle="tooltip" data-html="true"
-                                                    title="Cara mengecek Pengunjung adalah dengan mengetik 'netstat -anp |grep tcp |grep ::ffff: |wc -l' pada cli di server"></i>
-                                                <div class="row">
-                                                    <div class="col-md-10">
-                                                        <input type="number" class="form-control" id="pengunjung"
-                                                            placeholder="Cek Pengunjung.." name="pengunjung"
-                                                            value="{{ old('pengunjung') }}" required>
-                                                    </div> Orang
+                                        @if ($server->nameServer != 'ERP')
+                                            <div class="col-md-6">
+                                                <div class="form-group fill">
+                                                    <label class="form-label" for="pengunjung">Cek Pengunjung</label>
+                                                    <i class="feather icon-info" data-toggle="tooltip" data-html="true"
+                                                        title="Cara mengecek Pengunjung adalah dengan mengetik 'netstat -anp |grep tcp |grep ::ffff: |wc -l' pada cli di server"></i>
+                                                    <div class="row">
+                                                        <div class="col-md-10">
+                                                            <input type="number" class="form-control" id="pengunjung"
+                                                                placeholder="Cek Pengunjung.." name="pengunjung"
+                                                                value="{{ old('pengunjung') }}" required>
+                                                        </div> Orang
+                                                    </div>
+                                                    @error('pengunjung')
+                                                        <span id="category_id-error" class="error text-danger" for="input-id"
+                                                            style="display: block;">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
-                                                @error('pengunjung')
-                                                    <span id="category_id-error" class="error text-danger" for="input-id"
-                                                        style="display: block;">{{ $message }}</span>
-                                                @enderror
                                             </div>
-                                        </div>
+                                        @endif
                                         <div class="col-md-6">
                                             <div class="form-group fill">
                                                 <label class="form-label" for="pengunjung">Kondisi Backup Aplikasi</label>

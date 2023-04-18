@@ -70,17 +70,19 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>Grafik Statistik Pengunjung
-                                </h5>
-                            </div>
-                            <div class="card-body">
-                                <canvas id="getGrafik2"></canvas>
+                    @if ($server->nameServer != 'ERP')
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Grafik Statistik Pengunjung
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="getGrafik2"></canvas>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 @endif
                 @if (Auth::user()->id_role < 5)
                     <div class="col-sm-12">
