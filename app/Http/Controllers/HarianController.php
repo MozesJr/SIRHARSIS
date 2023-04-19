@@ -44,7 +44,7 @@ class HarianController extends Controller
             'tampilan' => ['required', 'string'],
             'ram' => ['required', 'string'],
             'hardisk' => ['required', 'string'],
-            'pengunjung' => ['required', 'string'],
+            // 'pengunjung' => ['required', 'string'],
             'backup' => ['required', 'string'],
             'dbService' => ['required', 'string'],
             'image*' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:1024'],
