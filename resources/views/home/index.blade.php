@@ -1,5 +1,6 @@
 @section('cssTambahan')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 @endsection
 @extends('layouts.admin')
 @section('content')
@@ -164,7 +165,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <div id="total-income-graph"></div>
+                            <div id="grafikApp"></div>
                         </div>
                     </div>
                 </div>
@@ -176,7 +177,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <canvas id="myChart1"></canvas>
+                            <div id="grafikEngineDB"></div>
                         </div>
                     </div>
                 </div>
@@ -188,7 +189,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <canvas id="myChart2"></canvas>
+                            <div id="grafikLevels"></div>
                         </div>
                     </div>
                 </div>
@@ -197,109 +198,88 @@
     </div>
 @endsection
 @section('jsTambahan')
-    {{-- <script>
-        var ctx = document.getElementById("myChart").getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: ["Laravel", "CodeIgniter", "YII"],
-                datasets: [{
-                    label: '',
-                    data: [
-                        {{ $engineApp[0] }}, {{ $engineApp[1] }}, {{ $engineApp[2] }}
-                    ],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.9)',
-                        'rgba(54, 162, 235, 0.9)',
-                        'rgba(255, 206, 86, 0.9)',
-                    ],
-                    borderColor: [
-                        'rgba(255,99,132,1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
-        });
-    </script> --}}
     <script>
-        var ctx = document.getElementById("myChart1").getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: ["MySQL", "SQL Server", "Oracle"],
-                datasets: [{
-                    label: '',
-                    data: [
-                        {{ $engineDB[0] }}, {{ $engineDB[1] }}, {{ $engineDB[2] }}
-                    ],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.9)',
-                        'rgba(54, 162, 235, 0.9)',
-                        'rgba(255, 206, 86, 0.9)',
-                    ],
-                    borderColor: [
-                        'rgba(255,99,132,1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
+        document.addEventListener('DOMContentLoaded', function() {
+            var engineAppData = {!! json_encode($engineApp) !!};
+            var options = {
+                chart: {
+                    type: 'pie',
+                },
+                series: engineAppData,
+                labels: ['Laravel', 'CodeIgniter', 'Yii'],
+                colors: ['#FF6347', '#4682B4', '#FFD700'],
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 200
+                        },
+                        legend: {
+                            position: 'bottom'
                         }
-                    }]
-                }
-            }
+                    }
+                }]
+            };
+
+            var chart = new ApexCharts(document.querySelector("#grafikApp"), options);
+            chart.render();
         });
     </script>
+
+
     <script>
-        var ctx = document.getElementById("myChart2").getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: ["Core", "Non-COre"],
-                datasets: [{
-                    label: '',
-                    data: [
-                        {{ $levels[0] }}, {{ $levels[1] }}
-                    ],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.9)',
-                        'rgba(54, 162, 235, 0.9)',
-                        'rgba(255, 206, 86, 0.9)',
-                    ],
-                    borderColor: [
-                        'rgba(255,99,132,1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
+        document.addEventListener('DOMContentLoaded', function() {
+            var engineDBData = {!! json_encode($engineDB) !!};
+            var options = {
+                chart: {
+                    type: 'pie',
+                },
+                series: engineDBData,
+                labels: ['MySQL', 'SQL Server', 'Oracle'],
+                colors: ['#FF6347', '#4682B4', '#FFD700'],
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 200
+                        },
+                        legend: {
+                            position: 'bottom'
                         }
-                    }]
-                }
-            }
+                    }
+                }]
+            };
+
+            var chart = new ApexCharts(document.querySelector("#grafikEngineDB"), options);
+            chart.render();
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var levelsData = {!! json_encode($levels) !!};
+            var options = {
+                chart: {
+                    type: 'pie',
+                },
+                series: levelsData,
+                labels: ['Core', 'Non-Core'],
+                colors: ['#FFA07A', '#87CEEB'],
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 200
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }]
+            };
+
+            var chart = new ApexCharts(document.querySelector("#grafikLevels"), options);
+            chart.render();
         });
     </script>
 @endsection

@@ -58,18 +58,17 @@
         }
 
         .signature table {
-            border-collapse: collapse;
-            width: 100%;
-            background-color: transparent;
+            border-collapse: separate;
+            border-spacing: 0;
+            border: none;
+            /* Menghapus garis luar tabel */
         }
 
         .signature td,
         .signature th {
-            border: 1px solid #ddd;
+            border: none;
             padding: 8px;
-            text-align: left;
             background-color: white;
-            /* Tambahkan properti ini */
         }
 
         .signature tr:nth-child(even) {
@@ -208,7 +207,6 @@
                 <td class="bold" style="text-align: center;">Tedi Hermawan</td>
                 <td class="bold" style="text-align: center;">Ecep Jenal M.</td>
             </tr>
-
         </table>
     </div>
     <footer>
