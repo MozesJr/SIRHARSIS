@@ -13,12 +13,13 @@
     <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon" />
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/background.css') }}" />
+
 </head>
 
 @yield('auth')
 
 {{-- Buat Bot --}}
-<div id="ChitchatWidget"></div>
+{{-- <div id="ChitchatWidget"></div>
 <script src="https://widget.eva.id/js/fg.js?v=VSI1.2"></script>
 <script language="javascript">
     var set = new Array();
@@ -39,7 +40,7 @@
         a.src = g;
         m.parentNode.insertBefore(a, m)
     })(window, document, "script", "https://widget.eva.id/js/eva_lite.js?v=1.087", set)
-</script>
+</script> --}}
 
 <script src="{{ asset('assets/js/vendor-all.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/bootstrap.min.js') }}"></script>

@@ -1,18 +1,20 @@
 @extends('layouts.admin')
+@section('cssTambahan')
+    <link rel="stylesheet" href="https://ableproadmin.com/bootstrap/default/assets/css/plugins/dataTables.bootstrap4.min.css">
+@endsection
 @section('content')
-    <div class="pcoded-main-container">
-        <div class="pcoded-content">
+    <div class="pc-container">
+        <div class="pc-content">
             <div class="page-header">
                 <div class="page-block">
                     <div class="row align-items-center">
                         <div class="col-md-12">
-                            <div class="page-header-title">
-                                <h5 class="m-b-10">Show Data Users</h5>
-                            </div>
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Data Users</a></li>
+                                <li class="breadcrumb-item">
+                                    <a href="{{ route('dashboard') }}">E-CODEC</a>
+                                </li>
                                 <li class="breadcrumb-item"><a href="#!">{{ $dataUser->name }}</a></li>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -75,7 +77,16 @@
                                 </a>
                             @endif
                             <a href="{{ route('users.edit', $dataUser->id) }}" class="btn btn-warning mr-2"
-                                style="float: right"><i class="feather icon-settings"></i></a>
+                                style="float: right"><svg xmlns="http://www.w3.org/2000/svg"
+                                    class="icon icon-tabler icon-tabler-edit" width="24" height="24"
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
+                                    <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z">
+                                    </path>
+                                    <path d="M16 5l3 3"></path>
+                                </svg></a>
                             <a href="{{ route('users.index') }}" class="btn btn-primary mr-2" style="float: right"><i
                                     class="feather icon-arrow-left"></i></a>
                         </div>
@@ -112,7 +123,8 @@
                                         @enderror
                                     </div>
                                     <div class="col-md-12 mt-3">
-                                        <label class="form-label" for="confirm_password">Konfirmasi Password</label>
+                                        <label class="form-label" for="confirm_password">Konfirmasi
+                                            Password</label>
                                         <input type="password" class="form-control form-password" id="confirm_password"
                                             placeholder="Konfirmasi Password" name="current_password"
                                             value="{{ old('confirm_password') }}" required onChange="onChange()">

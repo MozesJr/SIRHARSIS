@@ -3,763 +3,192 @@
 @endsection
 @extends('layouts.admin')
 @section('content')
-    <div class="pcoded-main-container">
-        <div class="pcoded-content">
+    <div class="pc-container">
+        <div class="pc-content">
             <div class="page-header">
                 <div class="page-block">
                     <div class="row align-items-center">
                         <div class="col-md-12">
-                            <div class="page-header-title">
-                                <h5 class="m-b-10">Dashboard</h5>
-                            </div>
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i
-                                            class="feather icon-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="#!">Dashboard</a></li>
+                                <li class="breadcrumb-item">
+                                    <a href="{{ route('dashboard') }}">E-CODEC</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="{{ route('dashboard') }}">Dashboard</a>
+                                </li>
                             </ul>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="page-header-title">
+                                <h2 class="mb-0">Dashboard</h2>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
             <div class="row">
-                {{-- <div class="col-lg-7 col-md-12">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="card support-bar overflow-hidden">
-                                <div class="card-body pb-0">
-                                    <h2 class="m-0">350</h2>
-                                    <span class="text-c-blue">Support Requests</span>
-                                    <p class="mb-3 mt-3">Total number of support requests that come in.</p>
-                                </div>
-                                <div id="support-chart"></div>
-                                <div class="card-footer bg-primary text-white">
-                                    <div class="row text-center">
-                                        <div class="col">
-                                            <h4 class="m-0 text-white">10</h4>
-                                            <span>Open</span>
-                                        </div>
-                                        <div class="col">
-                                            <h4 class="m-0 text-white">5</h4>
-                                            <span>Running</span>
-                                        </div>
-                                        <div class="col">
-                                            <h4 class="m-0 text-white">3</h4>
-                                            <span>Solved</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="card support-bar overflow-hidden">
-                                <div class="card-body pb-0">
-                                    <h2 class="m-0">350</h2>
-                                    <span class="text-c-green">Support Requests</span>
-                                    <p class="mb-3 mt-3">Total number of support requests that come in.</p>
-                                </div>
-                                <div id="support-chart1"></div>
-                                <div class="card-footer bg-success text-white">
-                                    <div class="row text-center">
-                                        <div class="col">
-                                            <h4 class="m-0 text-white">10</h4>
-                                            <span>Open</span>
-                                        </div>
-                                        <div class="col">
-                                            <h4 class="m-0 text-white">5</h4>
-                                            <span>Running</span>
-                                        </div>
-                                        <div class="col">
-                                            <h4 class="m-0 text-white">3</h4>
-                                            <span>Solved</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
-                <div class="col-lg-12 col-md-12">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-8">
-                                            <h4 class="text-c-yellow">{{ $dataUser }}</h4>
-                                            <h6 class="text-muted m-b-0">Total User</h6>
-                                        </div>
-                                        <div class="col-4 text-right">
-                                            <i class="feather icon-user f-28"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-footer bg-c-yellow">
-                                    <div class="row align-items-center">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-8">
-                                            <h4 class="text-c-green">{{ $dataServer }}</h4>
-                                            <h6 class="text-muted m-b-0">Catatan Server</h6>
-                                        </div>
-                                        <div class="col-4 text-right">
-                                            <i class="feather icon-file-text f-28"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-footer bg-c-green">
-                                    <div class="row align-items-center">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-8">
-                                            <h4 class="text-c-red">{{ $dataHarian }}</h4>
-                                            <h6 class="text-muted m-b-0">Tugas Harian</h6>
-                                        </div>
-                                        <div class="col-4 text-right">
-                                            <i class="feather icon-calendar f-28"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-footer bg-c-red">
-                                    <div class="row align-items-center">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-8">
-                                            <h4 class="text-c-blue">{{ $dataPencatatan }}</h4>
-                                            <h6 class="text-muted m-b-0">Catatan Kerjaan</h6>
-                                        </div>
-                                        <div class="col-4 text-right">
-                                            <i class="feather icon-file-text f-28"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-footer bg-c-blue">
-                                    <div class="row align-items-center">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5>Engine Aplikasi</h5>
-                                </div>
-                                <div class="card-body">
-                                    <canvas id="myChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5>Engine Database</h5>
-                                </div>
-                                <div class="card-body">
-                                    <canvas id="myChart1"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5>Level Aplikasi</h5>
-                                </div>
-                                <div class="card-body">
-                                    <canvas id="myChart2"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {{-- <div class="col-xl-6 col-md-12">
-                    <div class="card table-card">
-                        <div class="card-header">
-                            <h5>Projects</h5>
-                            <div class="card-header-right">
-                                <div class="btn-group card-option">
-                                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
-                                        <i class="feather icon-more-horizontal"></i>
-                                    </button>
-                                    <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
-                                        <li class="dropdown-item full-card"><a href="#!"><span><i
-                                                        class="feather icon-maximize"></i> maximize</span><span
-                                                    style="display:none"><i class="feather icon-minimize"></i>
-                                                    Restore</span></a></li>
-                                        <li class="dropdown-item minimize-card"><a href="#!"><span><i
-                                                        class="feather icon-minus"></i> collapse</span><span
-                                                    style="display:none"><i class="feather icon-plus"></i>
-                                                    expand</span></a></li>
-                                        <li class="dropdown-item reload-card"><a href="#!"><i
-                                                    class="feather icon-refresh-cw"></i> reload</a></li>
-                                        <li class="dropdown-item close-card"><a href="#!"><i
-                                                    class="feather icon-trash"></i> remove</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body p-0">
-                            <div class="table-responsive">
-                                <table class="table table-hover mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th>
-                                                <div class="chk-option">
-                                                    <label
-                                                        class="check-task custom-control custom-checkbox d-flex justify-content-center done-task">
-                                                        <input type="checkbox" class="custom-control-input">
-                                                        <span class="custom-control-label"></span>
-                                                    </label>
-                                                </div>
-                                                Assigned
-                                            </th>
-                                            <th>Name</th>
-                                            <th>Due Date</th>
-                                            <th class="text-right">Priority</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="chk-option">
-                                                    <label
-                                                        class="check-task custom-control custom-checkbox d-flex justify-content-center done-task">
-                                                        <input type="checkbox" class="custom-control-input">
-                                                        <span class="custom-control-label"></span>
-                                                    </label>
-                                                </div>
-                                                <div class="d-inline-block align-middle">
-                                                    <img src="assets/images/user/avatar-4.jpg" alt="user image"
-                                                        class="img-radius wid-40 align-top m-r-15">
-                                                    <div class="d-inline-block">
-                                                        <h6>John Deo</h6>
-                                                        <p class="text-muted m-b-0">Graphics Designer</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>Able Pro</td>
-                                            <td>Jun, 26</td>
-                                            <td class="text-right"><label class="badge badge-light-danger">Low</label>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="chk-option">
-                                                    <label
-                                                        class="check-task custom-control custom-checkbox d-flex justify-content-center done-task">
-                                                        <input type="checkbox" class="custom-control-input">
-                                                        <span class="custom-control-label"></span>
-                                                    </label>
-                                                </div>
-                                                <div class="d-inline-block align-middle">
-                                                    <img src="assets/images/user/avatar-2.jpg" alt="user image"
-                                                        class="img-radius wid-40 align-top m-r-15">
-                                                    <div class="d-inline-block">
-                                                        <h6>Jenifer Vintage</h6>
-                                                        <p class="text-muted m-b-0">Web Designer</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>Mashable</td>
-                                            <td>March, 31</td>
-                                            <td class="text-right"><label class="badge badge-light-primary">high</label>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="chk-option">
-                                                    <label
-                                                        class="check-task custom-control custom-checkbox d-flex justify-content-center done-task">
-                                                        <input type="checkbox" class="custom-control-input">
-                                                        <span class="custom-control-label"></span>
-                                                    </label>
-                                                </div>
-                                                <div class="d-inline-block align-middle">
-                                                    <img src="assets/images/user/avatar-3.jpg" alt="user image"
-                                                        class="img-radius wid-40 align-top m-r-15">
-                                                    <div class="d-inline-block">
-                                                        <h6>William Jem</h6>
-                                                        <p class="text-muted m-b-0">Developer</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>Flatable</td>
-                                            <td>Aug, 02</td>
-                                            <td class="text-right"><label class="badge badge-light-success">medium</label>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="chk-option">
-                                                    <label
-                                                        class="check-task custom-control custom-checkbox d-flex justify-content-center done-task">
-                                                        <input type="checkbox" class="custom-control-input">
-                                                        <span class="custom-control-label"></span>
-                                                    </label>
-                                                </div>
-                                                <div class="d-inline-block align-middle">
-                                                    <img src="assets/images/user/avatar-2.jpg" alt="user image"
-                                                        class="img-radius wid-40 align-top m-r-15">
-                                                    <div class="d-inline-block">
-                                                        <h6>David Jones</h6>
-                                                        <p class="text-muted m-b-0">Developer</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>Guruable</td>
-                                            <td>Sep, 22</td>
-                                            <td class="text-right"><label class="badge badge-light-primary">high</label>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
-                {{-- <div class="col-xl-6 col-md-12">
-                    <div class="card latest-update-card">
-                        <div class="card-header">
-                            <h5>Latest Updates</h5>
-                            <div class="card-header-right">
-                                <div class="btn-group card-option">
-                                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
-                                        <i class="feather icon-more-horizontal"></i>
-                                    </button>
-                                    <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
-                                        <li class="dropdown-item full-card"><a href="#!"><span><i
-                                                        class="feather icon-maximize"></i> maximize</span><span
-                                                    style="display:none"><i class="feather icon-minimize"></i>
-                                                    Restore</span></a></li>
-                                        <li class="dropdown-item minimize-card"><a href="#!"><span><i
-                                                        class="feather icon-minus"></i> collapse</span><span
-                                                    style="display:none"><i class="feather icon-plus"></i>
-                                                    expand</span></a></li>
-                                        <li class="dropdown-item reload-card"><a href="#!"><i
-                                                    class="feather icon-refresh-cw"></i> reload</a></li>
-                                        <li class="dropdown-item close-card"><a href="#!"><i
-                                                    class="feather icon-trash"></i> remove</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="latest-update-box">
-                                <div class="row p-t-30 p-b-30">
-                                    <div class="col-auto text-right update-meta">
-                                        <p class="text-muted m-b-0 d-inline-flex">2 hrs ago</p>
-                                        <i class="feather icon-twitter bg-twitter update-icon"></i>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#!">
-                                            <h6>+ 1652 Followers</h6>
-                                        </a>
-                                        <p class="text-muted m-b-0">You’re getting more and more followers, keep it up!
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="row p-b-30">
-                                    <div class="col-auto text-right update-meta">
-                                        <p class="text-muted m-b-0 d-inline-flex">4 hrs ago</p>
-                                        <i class="feather icon-briefcase bg-c-red update-icon"></i>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#!">
-                                            <h6>+ 5 New Products were added!</h6>
-                                        </a>
-                                        <p class="text-muted m-b-0">Congratulations!</p>
-                                    </div>
-                                </div>
-                                <div class="row p-b-0">
-                                    <div class="col-auto text-right update-meta">
-                                        <p class="text-muted m-b-0 d-inline-flex">2 day ago</p>
-                                        <i class="feather icon-facebook bg-facebook update-icon"></i>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#!">
-                                            <h6>+1 Friend Requests</h6>
-                                        </a>
-                                        <p class="text-muted m-b-10">This is great, keep it up!</p>
-                                        <div class="table-responsive">
-                                            <table class="table table-hover">
-                                                <tr>
-                                                    <td class="b-none">
-                                                        <a href="#!" class="align-middle">
-                                                            <img src="assets/images/user/avatar-2.jpg" alt="user image"
-                                                                class="img-radius wid-40 align-top m-r-15">
-                                                            <div class="d-inline-block">
-                                                                <h6>Jeny William</h6>
-                                                                <p class="text-muted m-b-0">Graphic Designer</p>
-                                                            </div>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-center">
-                                <a href="#!" class="b-b-primary text-primary">View all Projects</a>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
-                {{-- <div class="col-xl-4 col-md-12">
+                <div class="col-md-6 col-xxl-3">
                     <div class="card">
                         <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col-6">
-                                    <h3>$16,756</h3>
-                                    <h6 class="text-muted m-b-0">Visits<i class="fa fa-caret-down text-c-red m-l-10"></i>
-                                    </h6>
+                            <div class="d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <div class="avtar avtar-s bg-light-primary">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path opacity="0.4" d="M13 9H7" stroke="#4680FF" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path
+                                                d="M22.0002 10.9702V13.0302C22.0002 13.5802 21.5602 14.0302 21.0002 14.0502H19.0402C17.9602 14.0502 16.9702 13.2602 16.8802 12.1802C16.8202 11.5502 17.0602 10.9602 17.4802 10.5502C17.8502 10.1702 18.3602 9.9502 18.9202 9.9502H21.0002C21.5602 9.9702 22.0002 10.4202 22.0002 10.9702Z"
+                                                stroke="#4680FF" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path
+                                                d="M17.48 10.55C17.06 10.96 16.82 11.55 16.88 12.18C16.97 13.26 17.96 14.05 19.04 14.05H21V15.5C21 18.5 19 20.5 16 20.5H7C4 20.5 2 18.5 2 15.5V8.5C2 5.78 3.64 3.88 6.19 3.56C6.45 3.52 6.72 3.5 7 3.5H16C16.26 3.5 16.51 3.50999 16.75 3.54999C19.33 3.84999 21 5.76 21 8.5V9.95001H18.92C18.36 9.95001 17.85 10.17 17.48 10.55Z"
+                                                stroke="#4680FF" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
                                 </div>
-                                <div class="col-6">
-                                    <div id="seo-chart1" class="d-flex align-items-end"></div>
+                                <div class="flex-grow-1 ms-3 text-center">
+                                    <h5 class="mb-1 text-primary">{{ $dataUser }}</h5>
+                                    <h6 class="mb-0">Total User</h6>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-4 col-md-6">
+                <div class="col-md-6 col-xxl-3">
                     <div class="card">
                         <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col-6">
-                                    <h3>49.54%</h3>
-                                    <h6 class="text-muted m-b-0">Bounce Rate<i
-                                            class="fa fa-caret-up text-c-green m-l-10"></i></h6>
+                            <div class="d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <div class="avtar avtar-s bg-light-warning">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M21 7V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V7C3 4 4.5 2 8 2H16C19.5 2 21 4 21 7Z"
+                                                stroke="#E58A00" stroke-width="1.5" stroke-miterlimit="10"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path opacity="0.6" d="M14.5 4.5V6.5C14.5 7.6 15.4 8.5 16.5 8.5H18.5"
+                                                stroke="#E58A00" stroke-width="1.5" stroke-miterlimit="10"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path opacity="0.6" d="M8 13H12" stroke="#E58A00" stroke-width="1.5"
+                                                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path opacity="0.6" d="M8 17H16" stroke="#E58A00" stroke-width="1.5"
+                                                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
                                 </div>
-                                <div class="col-6">
-                                    <div id="seo-chart2" class="d-flex align-items-end"></div>
+                                <div class="flex-grow-1 ms-3 text-center">
+                                    <h5 class="mb-1 text-warning">{{ $dataServer }}</h5>
+                                    <h6 class="mb-0">Catatan Server</h6>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-4 col-md-6">
+                <div class="col-md-6 col-xxl-3">
                     <div class="card">
                         <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col-6">
-                                    <h3>1,62,564</h3>
-                                    <h6 class="text-muted m-b-0">Products<i class="fa fa-caret-down text-c-red m-l-10"></i>
-                                    </h6>
-                                </div>
-                                <div class="col-6">
-                                    <div id="seo-chart3" class="d-flex align-items-end"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
-                {{-- <div class="col-lg-8 col-md-12">
-                    <div class="card table-card review-card">
-                        <div class="card-header borderless ">
-                            <h5>Customer Reviews</h5>
-                            <div class="card-header-right">
-                                <div class="btn-group card-option">
-                                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
-                                        <i class="feather icon-more-horizontal"></i>
-                                    </button>
-                                    <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
-                                        <li class="dropdown-item full-card"><a href="#!"><span><i
-                                                        class="feather icon-maximize"></i> maximize</span><span
-                                                    style="display:none"><i class="feather icon-minimize"></i>
-                                                    Restore</span></a></li>
-                                        <li class="dropdown-item minimize-card"><a href="#!"><span><i
-                                                        class="feather icon-minus"></i> collapse</span><span
-                                                    style="display:none"><i class="feather icon-plus"></i>
-                                                    expand</span></a></li>
-                                        <li class="dropdown-item reload-card"><a href="#!"><i
-                                                    class="feather icon-refresh-cw"></i> reload</a></li>
-                                        <li class="dropdown-item close-card"><a href="#!"><i
-                                                    class="feather icon-trash"></i> remove</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="review-block">
-                                <div class="row">
-                                    <div class="col-sm-auto p-r-0">
-                                        <img src="assets/images/user/avatar-2.jpg" alt="user image"
-                                            class="img-radius profile-img cust-img m-b-15">
-                                    </div>
-                                    <div class="col">
-                                        <h6 class="m-b-15">John Deo <span class="float-right f-13 text-muted"> a week
-                                                ago</span></h6>
-                                        <a href="#!"><i class="feather icon-star-on f-18 text-c-yellow"></i></a>
-                                        <a href="#!"><i class="feather icon-star-on f-18 text-c-yellow"></i></a>
-                                        <a href="#!"><i class="feather icon-star-on f-18 text-c-yellow"></i></a>
-                                        <a href="#!"><i class="feather icon-star f-18 text-muted"></i></a>
-                                        <a href="#!"><i class="feather icon-star f-18 text-muted"></i></a>
-                                        <p class="m-t-15 m-b-15 text-muted">Lorem Ipsum is simply dummy text of the
-                                            printing and typesetting industry. Lorem Ipsum has been the industry's
-                                            standard dummy text ever since the 1500s, when an unknown printer
-                                            took a
-                                            galley of type and scrambled it to make a type specimen book.</p>
-                                        <a href="#!" class="m-r-30 text-muted"><i
-                                                class="feather icon-thumbs-up m-r-15"></i>Helpful?</a>
-                                        <a href="#!"><i class="feather icon-heart-on text-c-red m-r-15"></i></a>
-                                        <a href="#!"><i class="feather icon-edit text-muted"></i></a>
+                            <div class="d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <div class="avtar avtar-s bg-light-success">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8 2V5" stroke="#2ca87f" stroke-width="1.5" stroke-miterlimit="10"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M16 2V5" stroke="#2ca87f" stroke-width="1.5" stroke-miterlimit="10"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path opacity="0.4" d="M3.5 9.08984H20.5" stroke="#2ca87f"
+                                                stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path
+                                                d="M21 8.5V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V8.5C3 5.5 4.5 3.5 8 3.5H16C19.5 3.5 21 5.5 21 8.5Z"
+                                                stroke="#2ca87f" stroke-width="1.5" stroke-miterlimit="10"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path opacity="0.4" d="M15.6947 13.7002H15.7037" stroke="#2ca87f"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path opacity="0.4" d="M15.6947 16.7002H15.7037" stroke="#2ca87f"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path opacity="0.4" d="M11.9955 13.7002H12.0045" stroke="#2ca87f"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path opacity="0.4" d="M11.9955 16.7002H12.0045" stroke="#2ca87f"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path opacity="0.4" d="M8.29431 13.7002H8.30329" stroke="#2ca87f"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path opacity="0.4" d="M8.29395 16.7002H8.30293" stroke="#2ca87f"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm-auto p-r-0">
-                                        <img src="assets/images/user/avatar-4.jpg" alt="user image"
-                                            class="img-radius profile-img cust-img m-b-15">
-                                    </div>
-                                    <div class="col">
-                                        <h6 class="m-b-15">Allina D’croze <span class="float-right f-13 text-muted"> a
-                                                week ago</span></h6>
-                                        <a href="#!"><i class="feather icon-star-on f-18 text-c-yellow"></i></a>
-                                        <a href="#!"><i class="feather icon-star f-18 text-muted"></i></a>
-                                        <a href="#!"><i class="feather icon-star f-18 text-muted"></i></a>
-                                        <a href="#!"><i class="feather icon-star f-18 text-muted"></i></a>
-                                        <a href="#!"><i class="feather icon-star f-18 text-muted"></i></a>
-                                        <p class="m-t-15 m-b-15 text-muted">Lorem Ipsum is simply dummy text of the
-                                            printing and typesetting industry. Lorem Ipsum has been the industry's
-                                            standard dummy text ever since the 1500s, when an unknown printer
-                                            took a
-                                            galley of type and scrambled it to make a type specimen book.</p>
-                                        <a href="#!" class="m-r-30 text-muted"><i
-                                                class="feather icon-thumbs-up m-r-15"></i>Helpful?</a>
-                                        <a href="#!"><i class="feather icon-heart-on text-c-red m-r-15"></i></a>
-                                        <a href="#!"><i class="feather icon-edit text-muted"></i></a>
-                                        <blockquote class="blockquote m-t-15 m-b-0">
-                                            <h6>Allina D’croze</h6>
-                                            <p class="m-b-0 text-muted">Lorem Ipsum is simply dummy text of the
-                                                industry.</p>
-                                        </blockquote>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-right  m-r-20">
-                                <a href="#!" class="b-b-primary text-primary">View all Customer Reviews</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="mb-3">Power</h5>
-                                    <h2>2789<span class="text-muted m-l-5 f-14">kw</span></h2>
-                                    <div id="power-card-chart1"></div>
-                                    <div class="row">
-                                        <div class="col col-auto">
-                                            <div class="map-area">
-                                                <h6 class="m-0">2876 <span> kw</span></h6>
-                                                <p class="text-muted m-0">month</p>
-                                            </div>
-                                        </div>
-                                        <div class="col col-auto">
-                                            <div class="map-area">
-                                                <h6 class="m-0">234 <span> kw</span></h6>
-                                                <p class="text-muted m-0">Today</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="mb-3">Temperature</h5>
-                                    <h2>7.3<span class="text-muted m-l-10 f-14">deg</span></h2>
-                                    <div id="power-card-chart3"></div>
-                                    <div class="row">
-                                        <div class="col col-auto">
-                                            <div class="map-area">
-                                                <h6 class="m-0">4.5 <span> deg</span></h6>
-                                                <p class="text-muted m-0">month</p>
-                                            </div>
-                                        </div>
-                                        <div class="col col-auto">
-                                            <div class="map-area">
-                                                <h6 class="m-0">0.5 <span> deg</span></h6>
-                                                <p class="text-muted m-0">Today</p>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="flex-grow-1 ms-3 text-center">
+                                    <h5 class="mb-1 text-success">{{ $dataHarian }}</h5>
+                                    <h6 class="mb-0">Tugas Harian</h6>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-12">
-                    <div class="card chat-card">
-                        <div class="card-header">
-                            <h5>Chat</h5>
-                            <div class="card-header-right">
-                                <div class="btn-group card-option">
-                                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
-                                        <i class="feather icon-more-horizontal"></i>
-                                    </button>
-                                    <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
-                                        <li class="dropdown-item full-card"><a href="#!"><span><i
-                                                        class="feather icon-maximize"></i> maximize</span><span
-                                                    style="display:none"><i class="feather icon-minimize"></i>
-                                                    Restore</span></a></li>
-                                        <li class="dropdown-item minimize-card"><a href="#!"><span><i
-                                                        class="feather icon-minus"></i> collapse</span><span
-                                                    style="display:none"><i class="feather icon-plus"></i>
-                                                    expand</span></a></li>
-                                        <li class="dropdown-item reload-card"><a href="#!"><i
-                                                    class="feather icon-refresh-cw"></i> reload</a></li>
-                                        <li class="dropdown-item close-card"><a href="#!"><i
-                                                    class="feather icon-trash"></i> remove</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                <div class="col-md-6 col-xxl-3">
+                    <div class="card">
                         <div class="card-body">
-                            <div class="row m-b-20 received-chat">
-                                <div class="col-auto p-r-0">
-                                    <img src="assets/images/user/avatar-2.jpg" alt="user image"
-                                        class="img-radius wid-40">
-                                </div>
-                                <div class="col">
-                                    <div class="msg">
-                                        <p class="m-b-0">Nice to meet you!</p>
+                            <div class="d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <div class="avtar avtar-s bg-light-warning">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                                                stroke="#DC2626" stroke-width="1.5" stroke-miterlimit="10"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path opacity="0.4" d="M8.4707 10.7402L12.0007 14.2602L15.5307 10.7402"
+                                                stroke="#DC2626" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                        </svg>
                                     </div>
-                                    <p class="text-muted m-b-0"><i class="fa fa-clock-o m-r-10"></i>10:20am</p>
                                 </div>
-                            </div>
-                            <div class="row m-b-20 send-chat">
-                                <div class="col">
-                                    <div class="msg">
-                                        <p class="m-b-0">Nice to meet you!</p>
-                                    </div>
-                                    <p class="text-muted m-b-0"><i class="fa fa-clock-o m-r-10"></i>10:20am</p>
-                                </div>
-                                <div class="col-auto p-l-0">
-                                    <img src="assets/images/user/avatar-3.jpg" alt="user image"
-                                        class="img-radius wid-40">
-                                </div>
-                            </div>
-                            <div class="row m-b-20 received-chat">
-                                <div class="col-auto p-r-0">
-                                    <img src="assets/images/user/avatar-2.jpg" alt="user image"
-                                        class="img-radius wid-40">
-                                </div>
-                                <div class="col">
-                                    <div class="msg">
-                                        <p class="m-b-0">Nice to meet you!</p>
-                                        <img src="assets/images/widget/dashborad-1.jpg" alt="">
-                                        <img src="assets/images/widget/dashborad-3.jpg" alt="">
-                                    </div>
-                                    <p class="text-muted m-b-0"><i class="fa fa-clock-o m-r-10"></i>10:20am</p>
-                                </div>
-                            </div>
-                            <div class="form-group m-t-15">
-                                <label class="floating-label" for="Project">Send message</label>
-                                <input type="text" name="task-insert" class="form-control" id="Project">
-                                <div class="form-icon">
-                                    <button class="btn btn-primary btn-icon">
-                                        <i class="feather icon-message-circle"></i>
-                                    </button>
+                                <div class="flex-grow-1 ms-3 text-center">
+                                    <h5 class="mb-1 text-danger">{{ $dataPencatatan }}</h5>
+                                    <h6 class="mb-0">Catatan Kerjaan</h6>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="card user-card2">
-                        <div class="card-body text-center">
-                            <h6 class="m-b-15">Project Risk</h6>
-                            <div class="risk-rate">
-                                <span><b>5</b></span>
-                            </div>
-                            <h6 class="m-b-10 m-t-10">Balanced</h6>
-                            <a href="#!" class="text-c-green b-b-success">Change Your Risk</a>
-                            <div class="row justify-content-center m-t-10 b-t-default m-l-0 m-r-0">
-                                <div class="col m-t-15 b-r-default">
-                                    <h6 class="text-muted">Nr</h6>
-                                    <h6>AWS 2455</h6>
-                                </div>
-                                <div class="col m-t-15">
-                                    <h6 class="text-muted">Created</h6>
-                                    <h6>30th Sep</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="btn btn-success btn-block">Download Overall Report</button>
-                    </div>
-                </div> --}}
-                <div class="col-sm-12">
+                </div>
+
+                <div class="col-md-4">
                     <div class="card">
                         <div class="card-header">
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <h4>List Catatan Harian</h4>
-                                </div>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h5 class="mb-0">Engine Aplikasi</h5>
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="dt-responsive table-responsive">
-                                <div id="simpletable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <table id="simpletable"
-                                                class="table table-striped table-bordered nowrap dataTable"
-                                                aria-describedby="simpletable_info">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="sorting sorting_asc" tabindex="0"
-                                                            aria-controls="simpletable" rowspan="1" colspan="1"
-                                                            aria-sort="ascending"
-                                                            aria-label="#: activate to sort column descending">
-                                                            #</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="simpletable"
-                                                            rowspan="1" colspan="1"
-                                                            aria-label="Subject: activate to sort column ascending">
-                                                            Subject</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="simpletable"
-                                                            rowspan="1" colspan="1"
-                                                            aria-label="Pencatatan: activate to sort column ascending">
-                                                            Pencatatan</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="simpletable"
-                                                            rowspan="1" colspan="1"
-                                                            aria-label="User: activate to sort column ascending">
-                                                            User</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="simpletable"
-                                                            rowspan="1" colspan="1"
-                                                            aria-label="Waktu: activate to sort column ascending">
-                                                            Waktu</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div id="total-income-graph"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h5 class="mb-0">Engine Database</h5>
                             </div>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="myChart1"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h5 class="mb-0">Level Aplikasi</h5>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="myChart2"></canvas>
                         </div>
                     </div>
                 </div>
@@ -768,7 +197,7 @@
     </div>
 @endsection
 @section('jsTambahan')
-    <script>
+    {{-- <script>
         var ctx = document.getElementById("myChart").getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'doughnut',
@@ -802,7 +231,7 @@
                 }
             }
         });
-    </script>
+    </script> --}}
     <script>
         var ctx = document.getElementById("myChart1").getContext('2d');
         var myChart = new Chart(ctx, {

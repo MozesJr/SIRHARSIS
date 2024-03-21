@@ -3,24 +3,25 @@
     <link rel="stylesheet" href="https://ableproadmin.com/bootstrap/default/assets/css/plugins/dataTables.bootstrap4.min.css">
 @endsection
 @section('content')
-    <div class="pcoded-main-container">
-        <div class="pcoded-content">
+    <div class="pc-container">
+        <div class="pc-content">
+
             <div class="page-header">
                 <div class="page-block">
                     <div class="row align-items-center">
                         <div class="col-md-12">
-                            <div class="page-header-title">
-                                <h5 class="m-b-10">{{ $title }}</h5>
-                            </div>
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i
-                                            class="feather icon-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="{{ route('servers.index') }}">Server Management</a>
+                                <li class="breadcrumb-item">
+                                    <a href="{{ route('dashboard') }}">E-CODEC</a>
                                 </li>
-                                <li class="breadcrumb-item"><a
-                                        href="{{ route('servers.show', $dataServer->id) }}">{{ $dataServer->nameServer }}</a>
+                                <li class="breadcrumb-item">
+                                    <a href="{{ route('servers.index') }}">Server Management</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="">{{ $dataServer->ketServer }}</a>
+                                <li class="breadcrumb-item">
+                                    <a href="{{ route('servers.show', $dataServer->id) }}">{{ $dataServer->nameServer }}</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="#!">{{ $dataServer->ketServer }}</a>
                                 </li>
                             </ul>
                         </div>
@@ -35,12 +36,21 @@
                                 <div class="col-md-9">
                                     <h4>Data Server | {{ $dataServer->ketServer }}</h4>
                                 </div>
-                                <div class="col-md-3">
-                                    {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                {{-- <div class="col-md-3">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#staticBackdrop" style="float: right">
-                                        <i class="feather icon-plus"></i> Add Data
-                                    </button> --}}
-                                </div>
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            class="icon icon-tabler icon-tabler-pencil-plus" width="24" height="24"
+                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4"></path>
+                                            <path d="M13.5 6.5l4 4"></path>
+                                            <path d="M16 19h6"></path>
+                                            <path d="M19 16v6"></path>
+                                        </svg> Add Data
+                                    </button>
+                                </div> --}}
                             </div>
                         </div>
                         <div class="card-body">
@@ -73,7 +83,20 @@
                                                 <button type="button" class="btn btn-primary btn-sm rounded m-0 float-end"
                                                     data-bs-toggle="collapse" data-bs-target=".pro-det-edit"
                                                     aria-expanded="false" aria-controls="pro-det-edit-1 pro-det-edit-2">
-                                                    <i class="feather icon-edit"></i>
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                        class="icon icon-tabler icon-tabler-eye-edit" width="24"
+                                                        height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                        stroke="currentColor" fill="none" stroke-linecap="round"
+                                                        stroke-linejoin="round">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                        <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+                                                        <path
+                                                            d="M11.192 17.966c-3.242 -.28 -5.972 -2.269 -8.192 -5.966c2.4 -4 5.4 -6 9 -6c3.326 0 6.14 1.707 8.442 5.122">
+                                                        </path>
+                                                        <path
+                                                            d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39z">
+                                                        </path>
+                                                    </svg>
                                                 </button>
                                             </div>
                                             <hr>
@@ -97,7 +120,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group row align-items-center">
-                                                        <label class="col-sm-3 col-form-label font-weight-bolder">Path Akses
+                                                        <label class="col-sm-3 col-form-label font-weight-bolder">Path
+                                                            Akses
                                                         </label>
                                                         <div class="col-sm-9">
                                                             @if ($dataServer->id_pathAkses != null)
@@ -106,7 +130,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group row align-items-center">
-                                                        <label class="col-sm-3 col-form-label font-weight-bolder">Tanggal Go
+                                                        <label class="col-sm-3 col-form-label font-weight-bolder">Tanggal
+                                                            Go
                                                             Live
                                                         </label>
                                                         <div class="col-sm-9">
@@ -269,7 +294,20 @@
                                                     class="btn btn-primary btn-sm rounded m-0 float-end"
                                                     data-bs-toggle="collapse" data-bs-target=".pro-det-edit"
                                                     aria-expanded="false" aria-controls="pro-det-edit-1 pro-det-edit-2">
-                                                    <i class="feather icon-edit"></i>
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                        class="icon icon-tabler icon-tabler-eye-edit" width="24"
+                                                        height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                        stroke="currentColor" fill="none" stroke-linecap="round"
+                                                        stroke-linejoin="round">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                        <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+                                                        <path
+                                                            d="M11.192 17.966c-3.242 -.28 -5.972 -2.269 -8.192 -5.966c2.4 -4 5.4 -6 9 -6c3.326 0 6.14 1.707 8.442 5.122">
+                                                        </path>
+                                                        <path
+                                                            d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39z">
+                                                        </path>
+                                                    </svg>
                                                 </button>
                                             </div>
                                             <hr>
@@ -446,7 +484,20 @@
                                                     class="btn btn-primary btn-sm rounded m-0 float-end"
                                                     data-bs-toggle="collapse" data-bs-target=".pro-det-edit"
                                                     aria-expanded="false" aria-controls="pro-det-edit-1 pro-det-edit-2">
-                                                    <i class="feather icon-edit"></i>
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                        class="icon icon-tabler icon-tabler-eye-edit" width="24"
+                                                        height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                        stroke="currentColor" fill="none" stroke-linecap="round"
+                                                        stroke-linejoin="round">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                        <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+                                                        <path
+                                                            d="M11.192 17.966c-3.242 -.28 -5.972 -2.269 -8.192 -5.966c2.4 -4 5.4 -6 9 -6c3.326 0 6.14 1.707 8.442 5.122">
+                                                        </path>
+                                                        <path
+                                                            d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39z">
+                                                        </path>
+                                                    </svg>
                                                 </button>
                                             </div>
                                             <hr>
@@ -619,7 +670,20 @@
                                                     class="btn btn-primary btn-sm rounded m-0 float-end"
                                                     data-bs-toggle="collapse" data-bs-target=".pro-det-edit"
                                                     aria-expanded="false" aria-controls="pro-det-edit-1 pro-det-edit-2">
-                                                    <i class="feather icon-edit"></i>
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                        class="icon icon-tabler icon-tabler-eye-edit" width="24"
+                                                        height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                        stroke="currentColor" fill="none" stroke-linecap="round"
+                                                        stroke-linejoin="round">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                        <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+                                                        <path
+                                                            d="M11.192 17.966c-3.242 -.28 -5.972 -2.269 -8.192 -5.966c2.4 -4 5.4 -6 9 -6c3.326 0 6.14 1.707 8.442 5.122">
+                                                        </path>
+                                                        <path
+                                                            d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39z">
+                                                        </path>
+                                                    </svg>
                                                 </button>
                                             </div>
                                             <hr>

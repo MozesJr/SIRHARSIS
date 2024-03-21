@@ -9,25 +9,26 @@
     </style>
 @endsection
 @section('content')
-    <div class="pcoded-main-container">
-        <div class="pcoded-content">
-            <!-- [ breadcrumb ] start -->
+    <div class="pc-container">
+        <div class="pc-content">
+
             <div class="page-header">
                 <div class="page-block">
                     <div class="row align-items-center">
                         <div class="col-md-12">
-                            <div class="page-header-title">
-                                <h5 class="m-b-10">Server Management</h5>
-                            </div>
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i
-                                            class="feather icon-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="#!">Server Management</a></li>
+                                <li class="breadcrumb-item">
+                                    <a href="{{ route('dashboard') }}">E-CODEC</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="#!">Server Management</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
+
             <div class="row justify-content-center">
                 <div class="col-sm-12">
                     <div class="card">
@@ -39,10 +40,28 @@
                                 <div class="col-md-3">
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#staticBackdrop" style="float: right">
-                                        <i class="feather icon-plus"></i> Add Data
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            class="icon icon-tabler icon-tabler-pencil-plus" width="24" height="24"
+                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4"></path>
+                                            <path d="M13.5 6.5l4 4"></path>
+                                            <path d="M16 19h6"></path>
+                                            <path d="M19 16v6"></path>
+                                        </svg> Add Data
                                     </button>
                                     <a href="{{ route('exportServer') }}" class="btn btn-success mr-2"
-                                        style="float: right"><i class="feather icon-printer"></i> Export</a>
+                                        style="float: right"><svg xmlns="http://www.w3.org/2000/svg"
+                                            class="icon icon-tabler icon-tabler-file-export" width="24" height="24"
+                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+                                            <path
+                                                d="M11.5 21h-4.5a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v5m-5 6h7m-3 -3l3 3l-3 3">
+                                            </path>
+                                        </svg> Export</a>
                                 </div>
                             </div>
                         </div>
@@ -66,7 +85,7 @@
                                         <div class="col"><img class="img-radius img-fluid"
                                                 src="{{ asset('assets/images/peruri.jpg') }}" alt="User image"></div>
                                         <div class="col text-end pb-3">
-                                            <div class="dropdown">
+                                            {{-- <div class="dropdown">
                                                 <a class="drp-icon dropdown-toggle" data-bs-toggle="dropdown"
                                                     aria-haspopup="true" aria-expanded="false"><i
                                                         class="feather icon-more-horizontal"></i></a>
@@ -75,8 +94,8 @@
                                                         data-bs-target="#staticBackdrop">
                                                         Edit
                                                     </button>
-                                                    {{-- <a class="dropdown-item"
-                                                        href="{{ route('showServer', $srv->id) }}">Edit</a> --}}
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('showServer', $srv->id) }}">Edit</a>
                                                     <form action="{{ route('servers.destroy', $srv->id) }}" method="POST">
                                                         @csrf
                                                         @method('delete')
@@ -86,7 +105,7 @@
                                                         </button>
                                                     </form>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -97,7 +116,19 @@
                                             @endif
                                         </h4>
                                     </a>
-                                    <p class="mb-3 text-muted"><i class="feather icon-calendar"></i>
+                                    <p class="mb-3 text-muted"><svg xmlns="http://www.w3.org/2000/svg"
+                                            class="icon icon-tabler icon-tabler-calendar-event" width="18"
+                                            height="18" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                            fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path
+                                                d="M4 5m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z">
+                                            </path>
+                                            <path d="M16 3l0 4"></path>
+                                            <path d="M8 3l0 4"></path>
+                                            <path d="M4 11l16 0"></path>
+                                            <path d="M8 15h2v2h-2z"></path>
+                                        </svg></i>
                                         {{ Carbon\Carbon::parse($srv->created_at)->isoFormat('dddd, D MMMM Y') }}
                                     </p>
                                     <p class="mb-0"><b>Keterangan : </b>

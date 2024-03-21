@@ -1,18 +1,19 @@
 @extends('layouts.admin')
 @section('content')
-    <div class="pcoded-main-container">
-        <div class="pcoded-content">
+    <div class="pc-container">
+        <div class="pc-content">
+
             <div class="page-header">
                 <div class="page-block">
                     <div class="row align-items-center">
                         <div class="col-md-12">
-                            <div class="page-header-title">
-                                <h5 class="m-b-10">Software</h5>
-                            </div>
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i
-                                            class="feather icon-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="#!">Software</a></li>
+                                <li class="breadcrumb-item">
+                                    <a href="{{ route('dashboard') }}">E-CODEC</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="#!">Software</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -38,7 +39,15 @@
                             <h4>Daftar Data Base</h4>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#staticBackdrop" style="float: right">
-                                <i class="feather icon-plus"></i> Add Data
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil-plus"
+                                    width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4"></path>
+                                    <path d="M13.5 6.5l4 4"></path>
+                                    <path d="M16 19h6"></path>
+                                    <path d="M19 16v6"></path>
+                                </svg> Add Data
                             </button>
                         </div>
                         <div class="card-body">
@@ -75,7 +84,22 @@
                                                                 <button type="button" class="btn btn-warning"
                                                                     data-bs-toggle="modal"
                                                                     data-bs-target="#staticBackdrop1{{ $d->id }}">
-                                                                    <i class="feather icon-settings"></i>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                        class="icon icon-tabler icon-tabler-edit"
+                                                                        width="24" height="24" viewBox="0 0 24 24"
+                                                                        stroke-width="2" stroke="currentColor"
+                                                                        fill="none" stroke-linecap="round"
+                                                                        stroke-linejoin="round">
+                                                                        <path stroke="none" d="M0 0h24v24H0z"
+                                                                            fill="none"></path>
+                                                                        <path
+                                                                            d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1">
+                                                                        </path>
+                                                                        <path
+                                                                            d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z">
+                                                                        </path>
+                                                                        <path d="M16 5l3 3"></path>
+                                                                    </svg>
                                                                 </button>
                                                                 <div class="modal fade"
                                                                     id="staticBackdrop1{{ $d->id }}"
@@ -100,8 +124,8 @@
                                                                                         action="{{ route('ext.update', $d->id) }}">
                                                                                         @csrf
                                                                                         @method('PUT')
-                                                                                        <input type="hidden" name="soft"
-                                                                                            value="dbs">
+                                                                                        <input type="hidden"
+                                                                                            name="soft" value="dbs">
                                                                                         <div class="form-group fill">
                                                                                             <label class="form-label"
                                                                                                 for="name">Data
@@ -152,7 +176,15 @@
                             <h4>Daftar Data Bahasa Pemrograman / Framework</h4>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#staticBackdrop1" style="float: right">
-                                <i class="feather icon-plus"></i> Add Data
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil-plus"
+                                    width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4"></path>
+                                    <path d="M13.5 6.5l4 4"></path>
+                                    <path d="M16 19h6"></path>
+                                    <path d="M19 16v6"></path>
+                                </svg> Add Data
                             </button>
                         </div>
                         <div class="card-body">
@@ -189,7 +221,22 @@
                                                                 <button type="button" class="btn btn-warning"
                                                                     data-bs-toggle="modal"
                                                                     data-bs-target="#staticBackdrop1{{ $b->id }}">
-                                                                    <i class="feather icon-settings"></i>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                        class="icon icon-tabler icon-tabler-edit"
+                                                                        width="24" height="24" viewBox="0 0 24 24"
+                                                                        stroke-width="2" stroke="currentColor"
+                                                                        fill="none" stroke-linecap="round"
+                                                                        stroke-linejoin="round">
+                                                                        <path stroke="none" d="M0 0h24v24H0z"
+                                                                            fill="none"></path>
+                                                                        <path
+                                                                            d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1">
+                                                                        </path>
+                                                                        <path
+                                                                            d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z">
+                                                                        </path>
+                                                                        <path d="M16 5l3 3"></path>
+                                                                    </svg>
                                                                 </button>
                                                                 <div class="modal fade"
                                                                     id="staticBackdrop1{{ $b->id }}"

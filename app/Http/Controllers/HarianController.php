@@ -13,6 +13,17 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Str;
+use App\Exports\HarianExport;
+use App\Exports\ExcelPdfExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use Illuminate\Support\Facades\View;
+use PhpOffice\PhpWord\IOFactory;
+use PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\Settings;
 
 class HarianController extends Controller
 {
@@ -24,6 +35,7 @@ class HarianController extends Controller
         $dataServer = Server::where('id_pic_idUsers', Auth::user()->id)->get();
         $dataServerAdmin = Server::all();
         $dataHarian = Harian::all();
+        // dd($dataServer);
         $tanggal = Carbon::now()->isoFormat('D MMMM Y');
 
         return view('harian.index', [
@@ -35,8 +47,11 @@ class HarianController extends Controller
         ]);
     }
 
+
     public function store(Request $request)
     {
+        // dd($request->all());
+
         $validator = Validator::make($request->all(), [
             'id' => ['required', 'string'],
             'koneksi' => ['required', 'string'],
@@ -44,13 +59,40 @@ class HarianController extends Controller
             'tampilan' => ['required', 'string'],
             'ram' => ['required', 'string'],
             'hardisk' => ['required', 'string'],
-            // 'pengunjung' => ['required', 'string'],
             'backup' => ['required', 'string'],
             'dbService' => ['required', 'string'],
-            'image*' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:1024'],
+            'image1' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:2024'],
+            'image2' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:2024'],
+            'image3' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:2024'],
+            'image4' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:2024'],
+            'image5' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:2024'],
+            'image6' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:2024'],
+            'image7' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:2024'],
+            'image8' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:2024'],
         ], [
-            'image.file' => 'File Harus berformat jpeg, png, jpg, gif, svg',
-            'image.file' => 'Maximal File 1mb',
+            'koneksi.required' => 'Data Koneksi Harus dimasukan',
+            'service.required' => 'Data service Harus dimasukan',
+            'tampilan.required' => 'Data tampilan Harus dimasukan',
+            'ram.required' => 'Data ram Harus dimasukan',
+            'hardisk.required' => 'Data hardisk Harus dimasukan',
+            'backup.required' => 'Data backup Harus dimasukan',
+            'dbService.required' => 'Data dbService Harus dimasukan',
+            'image1.file' => 'File Harus berformat jpeg, png, jpg, gif, svg',
+            'image1.file' => 'Maximal File Koneksi 2mb',
+            'image2.file' => 'File Harus berformat jpeg, png, jpg, gif, svg',
+            'image2.file' => 'Maximal File Web Service 2mb',
+            'image3.file' => 'File Harus berformat jpeg, png, jpg, gif, svg',
+            'image3.file' => 'Maximal File Tampilan  2mb',
+            'image4.file' => 'File Harus berformat jpeg, png, jpg, gif, svg',
+            'image4.file' => 'Maximal File Ram 2mb',
+            'image5.file' => 'File Harus berformat jpeg, png, jpg, gif, svg',
+            'image5.file' => 'Maximal File Hardisk 2mb',
+            'image6.file' => 'File Harus berformat jpeg, png, jpg, gif, svg',
+            'image6.file' => 'Maximal File Pengunjung 2mb',
+            'image7.file' => 'File Harus berformat jpeg, png, jpg, gif, svg',
+            'image7.file' => 'Maximal File Backup 2mb',
+            'image8.file' => 'File Harus berformat jpeg, png, jpg, gif, svg',
+            'image8.file' => 'Maximal File Service DB 2mb',
         ]);
 
         if ($validator->fails()) {
@@ -59,6 +101,7 @@ class HarianController extends Controller
         }
 
         $tanggal = Carbon::now()->isoFormat('D MMMM Y');
+
         $waktu = now()->format('H:i:s');
         $id_user = Auth::user()->id;
 
@@ -76,6 +119,19 @@ class HarianController extends Controller
             'id_server' => $request->id,
             'id_users' => $id_user,
         ]);
+
+        $compressedImage = [];
+        for ($i = 1; $i <= 8; $i++) {
+
+            $compressedImage[$i] = $request->file('image' . $i);
+            $fileName = time() . rand(1, 99) . '.' . $compressedImage[$i]->extension();
+            $compressedImage[$i]->move(public_path('storage'), $fileName);
+            $data = [
+                'image' . $i => $fileName,
+            ];
+
+            Harian::where('id', $harian->id)->update($data);
+        }
 
         $waktu = $harian->waktu;
         $awal = substr($waktu, -8, 2);
@@ -97,28 +153,17 @@ class HarianController extends Controller
             'id_users' => $id_user,
         ]);
 
-        // dd($harian);
-
-        $files = [];
-        foreach ($request->file('image') as $key => $file) {
-            $fileName = time() . rand(1, 99) . '.' . $file->extension();
-            $file->move(public_path('storage'), $fileName);
-            $files[]['original_filename'] = $fileName;
-            // $file = $request->file('image')->store('harian-image');
-        }
-
-        foreach ($files as $key => $file) {
-            $dataImage = ImageGallery::create($file);
-
-            $data = [
-                'id_harian' => $harian->id,
-            ];
-
-            ImageGallery::where('id', $dataImage->id)->update($data);
-        }
-
         Alert::success('Berhasil', 'Data Tugas Harian telah ditambahkan');
         return redirect()->route('harian.show', $request->id);
+    }
+
+    private function compressAndStoreImage($image)
+    {
+        $compressedImage = Image::make($image)
+            ->resize(800, 600)
+            ->save('public/image/harian', 80);
+        $path = Storage::put('public/image/harian/compress', $compressedImage->encode(), 'public');
+        return $path;
     }
 
     public function show(Request $request, $id)
@@ -141,7 +186,7 @@ class HarianController extends Controller
             $dataGfafik = NULL;
         }
 
-        // dd($dataGfafik);
+        // dd($dataHarian);
 
         return view('harian.create', [
             'title' => $title,
@@ -156,74 +201,149 @@ class HarianController extends Controller
 
     public function update(Request $request, $id)
     {
-        // dd($request->all());
-        $dataHarian = Harian::find($id);
-
-        if ($request->image == NULL) {
-            $rule = [
-                'id' => ['required', 'string'],
-                'koneksi' => ['required', 'string'],
-                'service' => ['required', 'string'],
-                'tampilan' => ['required', 'string'],
-                'ram' => ['required', 'string'],
-                'hardisk' => ['required', 'string'],
-                'pengunjung' => ['required', 'string'],
-            ];
-        }
-
-        if ($request->oldImage == $request->image) {
-            $rule = [
-                'id' => ['required', 'string'],
-                'koneksi' => ['required', 'string'],
-                'service' => ['required', 'string'],
-                'tampilan' => ['required', 'string'],
-                'ram' => ['required', 'string'],
-                'hardisk' => ['required', 'string'],
-                'pengunjung' => ['required', 'string'],
-            ];
-        } else {
-            $rule = [
-                'id' => ['required', 'string'],
-                'koneksi' => ['required', 'string'],
-                'service' => ['required', 'string'],
-                'tampilan' => ['required', 'string'],
-                'ram' => ['required', 'string'],
-                'hardisk' => ['required', 'string'],
-                'pengunjung' => ['required', 'string'],
-                'image' => ['required', 'file', 'mimes:jpeg,png,jpg,gif,svg', 'max:1024'],
-            ];
-        }
-
-        $validator = Validator::make($request->all(), $rule);
+        $validator = Validator::make($request->all(), [
+            'koneksi' => ['required', 'string'],
+            'service' => ['required', 'string'],
+            'tampilan' => ['required', 'string'],
+            'ram' => ['required', 'string'],
+            'hardisk' => ['required', 'string'],
+            'backup' => ['required', 'string'],
+            'dbService' => ['required', 'string'],
+            'image1' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:1024'],
+            'image2' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:1024'],
+            'image3' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:1024'],
+            'image4' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:1024'],
+            'image5' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:1024'],
+            'image6' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:1024'],
+            'image7' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:1024'],
+            'image8' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:1024'],
+        ], [
+            'koneksi.required' => 'Data Koneksi Harus dimasukan',
+            'service.required' => 'Data service Harus dimasukan',
+            'tampilan.required' => 'Data tampilan Harus dimasukan',
+            'ram.required' => 'Data ram Harus dimasukan',
+            'hardisk.required' => 'Data hardisk Harus dimasukan',
+            'backup.required' => 'Data backup Harus dimasukan',
+            'dbService.required' => 'Data dbService Harus dimasukan',
+            'image1.file' => 'File Harus berformat jpeg, png, jpg, gif, svg',
+            'image1.file' => 'Maximal File 1mb',
+            'image2.file' => 'File Harus berformat jpeg, png, jpg, gif, svg',
+            'image2.file' => 'Maximal File 1mb',
+            'image3.file' => 'File Harus berformat jpeg, png, jpg, gif, svg',
+            'image3.file' => 'Maximal File 1mb',
+            'image4.file' => 'File Harus berformat jpeg, png, jpg, gif, svg',
+            'image4.file' => 'Maximal File 1mb',
+            'image5.file' => 'File Harus berformat jpeg, png, jpg, gif, svg',
+            'image5.file' => 'Maximal File 1mb',
+            'image6.file' => 'File Harus berformat jpeg, png, jpg, gif, svg',
+            'image6.file' => 'Maximal File 1mb',
+            'image7.file' => 'File Harus berformat jpeg, png, jpg, gif, svg',
+            'image7.file' => 'Maximal File 1mb',
+            'image8.file' => 'File Harus berformat jpeg, png, jpg, gif, svg',
+            'image8.file' => 'Maximal File 1mb',
+        ]);
 
         if ($validator->fails()) {
             Alert::toast('Gagal Menyimpan, cek kembali inputan anda', 'error');
             return back()->withErrors($validator)->withInput();
         }
 
-        $tanggal = $dataHarian->tanggal;
-        $waktu = $dataHarian->waktu;
-        $id_user = $dataHarian->id_users;
-        $dataServer = $dataHarian->id_server;
+        // Find the record to update
+        $harian = Harian::findOrFail($id);
 
-        $data = [
+        if ($request->image1 != NULL) {
+            $image1 = $request->image1;
+            $image1 = $request->file('image1');
+            $fileName1 = time() . rand(1, 99) . '.' . $image1->extension();
+            $image1->move(public_path('storage'), $fileName1);
+        } else {
+            $fileName1 = $harian->image1;
+        }
+
+        if ($request->image2 != NULL) {
+            $image2 = $request->image2;
+            $image2 = $request->file('image2');
+            $fileName2 = time() . rand(1, 99) . '.' . $image2->extension();
+            $image2->move(public_path('storage'), $fileName2);
+        } else {
+            $fileName2 = $harian->image2;
+        }
+
+        if ($request->image3 != NULL) {
+            $image3 = $request->image3;
+            $image3 = $request->file('image3');
+            $fileName3 = time() . rand(1, 99) . '.' . $image3->extension();
+            $image3->move(public_path('storage'), $fileName3);
+        } else {
+            $fileName3 = $harian->image3;
+        }
+
+        if ($request->image4 != NULL) {
+            $image4 = $request->image4;
+            $image4 = $request->file('image4');
+            $fileName4 = time() . rand(1, 99) . '.' . $image4->extension();
+            $image4->move(public_path('storage'), $fileName4);
+        } else {
+            $fileName4 = $harian->image4;
+        }
+
+        if ($request->image5 != NULL) {
+            $image5 = $request->image5;
+            $image5 = $request->file('image5');
+            $fileName5 = time() . rand(1, 99) . '.' . $image5->extension();
+            $image5->move(public_path('storage'), $fileName5);
+        } else {
+            $fileName5 = $harian->image5;
+        }
+
+        if ($request->image6 != NULL) {
+            $image6 = $request->image6;
+            $image6 = $request->file('image6');
+            $fileName6 = time() . rand(1, 99) . '.' . $image6->extension();
+            $image6->move(public_path('storage'), $fileName6);
+        } else {
+            $fileName6 = $harian->image6;
+        }
+        if ($request->image7 != NULL) {
+            $image7 = $request->image7;
+            $image7 = $request->file('image7');
+            $fileName7 = time() . rand(1, 99) . '.' . $image7->extension();
+            $image7->move(public_path('storage'), $fileName7);
+        } else {
+            $fileName7 = $harian->image7;
+        }
+        if ($request->image8 != NULL) {
+            $image8 = $request->image8;
+            $image8 = $request->file('image8');
+            $fileName8 = time() . rand(1, 99) . '.' . $image8->extension();
+            $image8->move(public_path('storage'), $fileName8);
+        } else {
+            $fileName8 = $harian->image8;
+        }
+
+        $harian->update([
             'koneksi' => $request->koneksi,
             'service' => $request->service,
             'tampilan' => $request->tampilan,
             'ram' => $request->ram,
             'hardisk' => $request->hardisk,
             'pengunjung' => $request->pengunjung,
-            'tanggal' => $tanggal,
-            'waktu' => $waktu,
-            'id_server' => $dataServer,
-            'id_users' => $id_user,
-        ];
+            'dbService' => $request->dbService,
+            'id_backup' => $request->backup,
+            'image1' => $fileName1,
+            'image2' => $fileName2,
+            'image3' => $fileName3,
+            'image4' => $fileName4,
+            'image5' => $fileName5,
+            'image6' => $fileName6,
+            'image7' => $fileName7,
+            'image8' => $fileName8,
+        ]);
 
-        Harian::where('id', $id)->update($data);
-
-        Alert::success('Berhasil', 'Data Tugas Harian telah diubah');
-        return redirect()->route('harian.show', $dataHarian->id_server);
+        Alert::success('Berhasil', 'Data Tugas Harian telah diperbarui');
+        return redirect()->route('harian.show', $harian->id_server);
     }
+
 
     public function destroy($id)
     {
@@ -243,14 +363,57 @@ class HarianController extends Controller
         return redirect()->route('harian.show', $harian->id_server);
     }
 
+
     public function exportHarianId($id)
     {
-        $dataHarian = Harian::where('id_server', $id)->get();
         $server = Harian::where('id_server', $id)->first();
-        return view('harian.export', [
-            'dataHarian' => $dataHarian,
-            'server' => $server,
-        ]);
+        $date = date('d-m-Y');
+        return Excel::download(new HarianExport($id), 'Data Harian ' . $server->Server->nameServer . '-' . $date . '.xlsx');
+    }
+
+    public function exportHarianRange(Request $request, $id)
+    {
+        $awal = $request->input('awal');
+        $akhir = $request->input('akhir');
+
+        $server = Harian::where('id_server', $id)->first();
+
+        $filename = 'Data Harian ' . $server->Server->nameServer . '-' . $awal . '-' . $akhir . '.xlsx';
+
+        return Excel::download(new HarianExport($id, $awal, $akhir), $filename);
+    }
+
+    private function getData($server, $awal, $akhir)
+    {
+        $query = Harian::where('id_server', $server->id);
+
+        if ($awal && $akhir) {
+            $query->whereBetween(DB::raw('DATE(created_at)'), [$awal, $akhir]);
+        }
+
+        return $query->get();
+    }
+
+    public function generatePDF(Request $request, $id)
+    {
+        return (new ExcelPdfExport())->exportPdf($id);
+
+        // $nameServer = Harian::where('id_server', $id)->first();
+        // $date = date('d-m-Y');
+        // $server = Harian::where('id_server', $id)->get();
+
+        // return view('pdf.view', [
+        //     'server' => $server,
+        //     'nameServer' => $nameServer,
+        // ]);
+    }
+
+    public function generatePDFRange(Request $request)
+    {
+        $id = $request->input('id_server');
+        $start = $request->input('start');
+        $end = $request->input('end');
+        return (new ExcelPdfExport())->exportPdf($id, $start, $end);
     }
 
     public function exportPdfHarian($id)
@@ -270,7 +433,8 @@ class HarianController extends Controller
         $backup = DataBackup::all();
         $server = Server::find($id);
 
-        return view('harian.add', [
+
+        return view('harian.add1', [
             'title' => $title,
             'dataBackup' => $backup,
             'server' => $server,
@@ -280,14 +444,16 @@ class HarianController extends Controller
     public function updateHarian($id)
     {
         $title = 'Ubah Data Harian';
+        $backup = DataBackup::all();
         $server = Harian::find($id);
-        $gambar = ImageGallery::where('id_harian', $id)->get();
+        // $gambar = ImageGallery::where('id_harian', $id)->get();
 
-        // dd($gambar);
-        return view('harian.update', [
+        // dd($server);
+        return view('harian.update1', [
             'server' => $server,
             'title' => $title,
-            'gambar' => $gambar,
+            // 'gambar' => $gambar,
+            'dataBackup' => $backup
         ]);
     }
 }

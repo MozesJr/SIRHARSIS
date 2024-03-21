@@ -18,6 +18,7 @@ use App\Http\Controllers\StatussController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PdfController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,9 +65,12 @@ Route::group(['middleware' => ['auth', 'checkRole:5,1']], function () {
     Route::post('/harian/upload', [HarianController::class, 'storeMedia'])->name('harian.upload');
     Route::get('exportHarianId/{id}', [HarianController::class, 'exportHarianId'])->name('exportHarianId');
     Route::get('exportPdfHarian/{id}', [HarianController::class, 'exportPdfHarian'])->name('exportPdfHarian');
-
+    Route::get('/harian/generatePDF/{id}', [HarianController::class, 'generatePDF'])->name('generatePDF');
+    Route::post('/harian/generatePDFByRange', [HarianController::class, 'generatePDFRange'])->name('generatePDFByRange');
     Route::post('/upload', [UploadController::class, 'uploadDropzoneFile'])->name('front.upload');
     Route::post('/file-destroy', [UploadController::class, 'destroyFile'])->name('front.file-destroy');
+    Route::get('harian/export/{id}', [HarianController::class, 'exportHarianId'])->name('harian.export');
+    Route::post('harian/export/{id}', [HarianController::class, 'exportHarianRange'])->name('harian.export.range');
 });
 
 require __DIR__ . '/auth.php';

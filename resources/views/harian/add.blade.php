@@ -1,19 +1,21 @@
 @extends('layouts.admin')
 @section('content')
-    <div class="pcoded-main-container">
-        <div class="pcoded-content">
+    <div class="pc-container">
+        <div class="pc-content">
             <div class="page-header">
                 <div class="page-block">
                     <div class="row align-items-center">
                         <div class="col-md-12">
-                            <div class="page-header-title">
-                                <h5 class="m-b-10">Tugas Harian</h5>
-                            </div>
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i
-                                            class="feather icon-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="{{ route('harian.index') }}">Tugas Harian</a></li>
-                                <li class="breadcrumb-item"><a href="#!">Create Data</a></li>
+                                <li class="breadcrumb-item">
+                                    <a href="{{ route('dashboard') }}">E-CODEC</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="{{ route('harian.index') }}">Tugas Harian</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="#!">Create Data</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -101,6 +103,7 @@
                                                 @enderror
                                             </div>
                                         </div>
+
                                         <div class="col-md-6">
                                             <div class="form-group fill">
                                                 <label class="form-label" for="hardisk">Cek Free Space Hardisk
@@ -121,6 +124,7 @@
                                                 @enderror
                                             </div>
                                         </div>
+
                                         @if ($server->nameServer != 'ERP')
                                             <div class="col-md-6">
                                                 <div class="form-group fill">
@@ -141,6 +145,7 @@
                                                 </div>
                                             </div>
                                         @endif
+
                                         <div class="col-md-6">
                                             <div class="form-group fill">
                                                 <label class="form-label" for="pengunjung">Kondisi Backup Aplikasi</label>
