@@ -30,12 +30,6 @@
         </div>
     </div>
 
-    {{-- Memanggil NavBar --}}
-    @include('layouts.navbar')
-
-    {{-- Memanggil Header --}}
-    @include('layouts.header')
-
     {{-- isi data content --}}
     @yield('content')
     @include('sweetalert::alert')
