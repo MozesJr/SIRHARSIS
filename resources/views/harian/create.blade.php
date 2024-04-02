@@ -2,6 +2,7 @@
 @section('cssTambahan')
     <link rel="stylesheet" href="https://ableproadmin.com/bootstrap/default/assets/css/plugins/dataTables.bootstrap4.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 @endsection
 @section('content')
     <div class="pc-container">
@@ -96,41 +97,9 @@
             @endif
             <div class="row justify-content-center">
                 @if (Auth::user()->id_role == 5)
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>Grafik Free Memory Ram
-                                </h5>
-                            </div>
-                            <div class="card-body">
-                                <canvas id="getGrafik"></canvas>
-                            </div>
-                        </div>
+                    <div class="card">
+                        <div id="FullData" class="mt-3"></div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>Grafik Free Space Hardisk
-                                </h5>
-                            </div>
-                            <div class="card-body">
-                                <canvas id="getGrafik1"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    @if ($server->nameServer != 'ERP')
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5>Grafik Statistik Pengunjung
-                                    </h5>
-                                </div>
-                                <div class="card-body">
-                                    <canvas id="getGrafik2"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
                 @endif
                 @if (Auth::user()->id_role < 5)
                     <div class="col-sm-12">
@@ -145,9 +114,8 @@
                                         <a href="{{ route('harian.add', $server->id) }}" class="btn btn-primary mr-2"
                                             style="float: right"><svg xmlns="http://www.w3.org/2000/svg"
                                                 class="icon icon-tabler icon-tabler-pencil-plus" width="24"
-                                                height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                stroke="currentColor" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
+                                                height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                                 <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4"></path>
                                                 <path d="M13.5 6.5l4 4"></path>
@@ -557,6 +525,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous">
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script>
         $(document).ready(function() {
             $('#openModalButton').click(function() {
@@ -630,200 +599,49 @@
     @endphp
 
     <script>
-        var ctx = document.getElementById('getGrafik').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: <?= json_encode($tanggal) ?>,
-                datasets: [{
-                    label: 'Free Memory ',
-                    data: <?= json_encode($ram) ?>,
-                    lineTension: 0.3,
-                    backgroundColor: "rgba(78, 115, 223, 0.25)",
-                    borderColor: "rgba(78, 115, 223, 1)",
-                    pointRadius: 3,
-                    pointBackgroundColor: "rgba(78, 115, 223, 1)",
-                    pointBorderColor: "rgba(78, 115, 223, 1)",
-                    pointHoverRadius: 3,
-                    pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-                    pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-                    pointHitRadius: 10,
-                    pointBorderWidth: 2,
-                }]
-            },
-            options: {
-                maintainAspectRatio: false,
-                layout: {
-                    padding: {
-                        left: 10,
-                        right: 25,
-                        top: 25,
-                        bottom: 0
-                    }
+        var options = {
+            series: [{
+                    name: 'Free Memory',
+                    data: <?= json_encode($ram) ?>
                 },
-                scales: {
-                    xAxes: [{
-                        time: {
-                            unit: 'date'
-                        },
-                        gridLines: {
-                            display: false,
-                            drawBorder: false
-                        },
-                        ticks: {
-                            maxTicksLimit: 7
-                        }
-                    }],
-                    yAxes: [{
-                        ticks: {
-                            maxTicksLimit: 5,
-                            padding: 10,
-                        },
-                        gridLines: {
-                            color: "rgb(234, 236, 244)",
-                            zeroLineColor: "rgb(234, 236, 244)",
-                            drawBorder: false,
-                            borderDash: [2],
-                            zeroLineBorderDash: [2]
-                        }
-                    }],
+                {
+                    name: 'Free Hardisk',
+                    data: <?= json_encode($hardisk) ?>
                 },
-                legend: {
-                    display: false
+                {
+                    name: 'Pengunjung',
+                    data: <?= json_encode($pengunjung) ?>
                 }
+            ],
+            chart: {
+                height: 350,
+                type: 'line',
+                zoom: {
+                    enabled: false
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                curve: 'straight'
+            },
+            title: {
+                text: 'Statistik Penggunaan Memory, Hardisk dan Pengunjung',
+                align: 'left'
+            },
+            grid: {
+                row: {
+                    colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                    opacity: 0.5
+                },
+            },
+            xaxis: {
+                categories: <?= json_encode($tanggal) ?>,
             }
-        });
-    </script>
+        };
 
-    <script>
-        var ctx = document.getElementById('getGrafik1').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: <?= json_encode($tanggal) ?>,
-                datasets: [{
-                    label: 'Free Hardisk ',
-                    data: <?= json_encode($hardisk) ?>,
-                    lineTension: 0.3,
-                    backgroundColor: "rgba(78, 115, 223, 0.25)",
-                    borderColor: "rgba(78, 115, 223, 1)",
-                    pointRadius: 3,
-                    pointBackgroundColor: "rgba(78, 115, 223, 1)",
-                    pointBorderColor: "rgba(78, 115, 223, 1)",
-                    pointHoverRadius: 3,
-                    pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-                    pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-                    pointHitRadius: 10,
-                    pointBorderWidth: 2,
-                }]
-            },
-            options: {
-                maintainAspectRatio: false,
-                layout: {
-                    padding: {
-                        left: 10,
-                        right: 25,
-                        top: 25,
-                        bottom: 0
-                    }
-                },
-                scales: {
-                    xAxes: [{
-                        time: {
-                            unit: 'date'
-                        },
-                        gridLines: {
-                            display: false,
-                            drawBorder: false
-                        },
-                        ticks: {
-                            maxTicksLimit: 7
-                        }
-                    }],
-                    yAxes: [{
-                        ticks: {
-                            maxTicksLimit: 5,
-                            padding: 10,
-                        },
-                        gridLines: {
-                            color: "rgb(234, 236, 244)",
-                            zeroLineColor: "rgb(234, 236, 244)",
-                            drawBorder: false,
-                            borderDash: [2],
-                            zeroLineBorderDash: [2]
-                        }
-                    }],
-                },
-                legend: {
-                    display: false
-                }
-            }
-        });
-    </script>
-
-    <script>
-        var ctx = document.getElementById('getGrafik2').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: <?= json_encode($tanggal) ?>,
-                datasets: [{
-                    label: 'Pengunjung ',
-                    data: <?= json_encode($pengunjung) ?>,
-                    lineTension: 0.3,
-                    backgroundColor: "rgba(78, 115, 223, 0.25)",
-                    borderColor: "rgba(78, 115, 223, 1)",
-                    pointRadius: 3,
-                    pointBackgroundColor: "rgba(78, 115, 223, 1)",
-                    pointBorderColor: "rgba(78, 115, 223, 1)",
-                    pointHoverRadius: 3,
-                    pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-                    pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-                    pointHitRadius: 10,
-                    pointBorderWidth: 2,
-                }]
-            },
-            options: {
-                maintainAspectRatio: false,
-                layout: {
-                    padding: {
-                        left: 10,
-                        right: 25,
-                        top: 25,
-                        bottom: 0
-                    }
-                },
-                scales: {
-                    xAxes: [{
-                        time: {
-                            unit: 'date'
-                        },
-                        gridLines: {
-                            display: false,
-                            drawBorder: false
-                        },
-                        ticks: {
-                            maxTicksLimit: 7
-                        }
-                    }],
-                    yAxes: [{
-                        ticks: {
-                            maxTicksLimit: 5,
-                            padding: 10,
-                        },
-                        gridLines: {
-                            color: "rgb(234, 236, 244)",
-                            zeroLineColor: "rgb(234, 236, 244)",
-                            drawBorder: false,
-                            borderDash: [2],
-                            zeroLineBorderDash: [2]
-                        }
-                    }],
-                },
-                legend: {
-                    display: false
-                }
-            }
-        });
+        var chart = new ApexCharts(document.querySelector("#FullData"), options);
+        chart.render();
     </script>
 @endsection
