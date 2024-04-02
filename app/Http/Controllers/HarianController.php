@@ -209,9 +209,9 @@ class HarianController extends Controller
             $tanggal_akhir = Carbon::parse($request->akhir)->isoFormat('D MMMM Y');
             $dataGfafik = Harian::select('ram', 'hardisk', 'pengunjung', 'tanggal', 'waktu')->Where('id_server', $id)->whereBetween('tanggal', [$tanggal_awal, $tanggal_akhir])->get();
         } else {
-            $dataGrafik = Harian::select('ram', 'hardisk', 'pengunjung', 'tanggal', 'waktu')
+            $dataGfafik = Harian::select('ram', 'hardisk', 'pengunjung', 'tanggal', 'waktu')
                 ->where('id_server', $id)
-                ->whereYear('tanggal', date('Y'))
+                ->whereYear('created_at', date('Y'))
                 ->get();
         }
 
