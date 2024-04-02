@@ -55,7 +55,6 @@ class HarianController extends Controller
         $validator = Validator::make($request->all(), [
             'id' => ['required', 'string'],
             'koneksi' => ['required', 'string'],
-            'service' => ['required', 'string'],
             'tampilan' => ['required', 'string'],
             'ram' => ['required', 'string'],
             'hardisk' => ['required', 'string'],
@@ -71,7 +70,6 @@ class HarianController extends Controller
             'image8' => ['file', 'mimes:jpeg,png,jpg,gif,svg', 'max:2024'],
         ], [
             'koneksi.required' => 'Data Koneksi Harus dimasukan',
-            'service.required' => 'Data service Harus dimasukan',
             'tampilan.required' => 'Data tampilan Harus dimasukan',
             'ram.required' => 'Data ram Harus dimasukan',
             'hardisk.required' => 'Data hardisk Harus dimasukan',
@@ -105,13 +103,25 @@ class HarianController extends Controller
         $waktu = now()->format('H:i:s');
         $id_user = Auth::user()->id;
 
+        if ($request->service == NULL) {
+            $service = '-';
+        } else {
+            $service = $request->service;
+        }
+
+        if ($request->pengunjung == NULL) {
+            $pengunjung = '-';
+        } else {
+            $pengunjung = $request->pengunjung;
+        }
+
         $harian = Harian::create([
             'koneksi' => $request->koneksi,
-            'service' => $request->service,
+            'service' => $service,
             'tampilan' => $request->tampilan,
             'ram' => $request->ram,
             'hardisk' => $request->hardisk,
-            'pengunjung' => $request->pengunjung,
+            'pengunjung' => $pengunjung,
             'tanggal' => $tanggal,
             'waktu' => $waktu,
             'dbService' => $request->dbService,
@@ -120,18 +130,38 @@ class HarianController extends Controller
             'id_users' => $id_user,
         ]);
 
+        // $compressedImage = [];
+        // for ($i = 1; $i <= 8; $i++) {
+
+        //     $compressedImage[$i] = $request->file('image' . $i);
+        //     if ($compressedImage[$i] == NULL) {
+        //         $compressedImage[$i] = 'gambar.jpg';
+        //     }
+        //     $fileName = time() . rand(1, 99) . '.' . $compressedImage[$i]->extension();
+        //     $compressedImage[$i]->move(public_path('storage'), $fileName);
+        //     $data = [
+        //         'image' . $i => $fileName,
+        //     ];
+
+        //     Harian::where('id', $harian->id)->update($data);
+        // }
+
         $compressedImage = [];
         for ($i = 1; $i <= 8; $i++) {
-
             $compressedImage[$i] = $request->file('image' . $i);
-            $fileName = time() . rand(1, 99) . '.' . $compressedImage[$i]->extension();
-            $compressedImage[$i]->move(public_path('storage'), $fileName);
+            if ($compressedImage[$i] == NULL) {
+                $fileName = 'gambar.jpg';
+            } else {
+                $fileName = time() . rand(1, 99) . '.' . $compressedImage[$i]->extension();
+                $compressedImage[$i]->move(public_path('storage'), $fileName);
+            }
             $data = [
                 'image' . $i => $fileName,
             ];
 
             Harian::where('id', $harian->id)->update($data);
         }
+
 
         $waktu = $harian->waktu;
         $awal = substr($waktu, -8, 2);
