@@ -53,11 +53,23 @@
         }
 
         img {
-            max-width: 250px;
+            max-width: 100%;
             max-height: 100px;
+            display: block;
+            margin: auto;
+            height: auto;
+        }
+
+        .signature {
+            page-break-inside: avoid;
+            /* Mencegah pembagian tabel ke halaman berikutnya */
         }
 
         .signature table {
+            width: 100%;
+            /* Menetapkan lebar tabel ke lebar penuh halaman */
+            margin-top: 20px;
+            /* Memberikan ruang di atas tabel */
             border-collapse: separate;
             border-spacing: 0;
             border: none;
@@ -67,6 +79,7 @@
         .signature td,
         .signature th {
             border: none;
+            text-align: center;
             padding: 8px;
             background-color: white;
         }
@@ -97,7 +110,7 @@
     <header>
         <img src="{{ public_path('assets/images/peruri.jpg') }}" alt="Logo" height="150px">
     </header>
-    <h2 style="text-align: center;">Data Export Aplikasi {{ $nameServer->Server->nameServer }}</h2>
+    <h2 style="text-align: center;">Laporan Monitoring Harian Aplikasi {{ $nameServer->Server->nameServer }}</h2>
     @foreach ($server as $data)
         <h3>Data report tanggal {{ $data->tanggal }}</h3>
         <table>
@@ -107,9 +120,8 @@
             </tr>
             <tr>
                 <th>Gambar Koneksi</th>
-                <td>
-                    <img src="{{ public_path('storage/' . $data->image1) }}" alt="Gambar Koneksi"
-                        style="width: 100px; height: 100px">
+                <td style="text-align: center; vertical-align: middle;">
+                    <img src="{{ public_path('storage/' . $data->image1) }}" alt="Gambar Koneksi">
                 </td>
             </tr>
             <tr>
@@ -118,9 +130,8 @@
             </tr>
             <tr>
                 <th>Gambar Web Service</th>
-                <td>
-                    <img src="{{ public_path('storage/' . $data->image2) }}" alt="Gambar Web Service"
-                        style="width: 100px; height: 100px">
+                <td style="text-align: center; vertical-align: middle;">
+                    <img src="{{ public_path('storage/' . $data->image2) }}" alt="Gambar Web Service">
                 </td>
             </tr>
             <br>
@@ -130,9 +141,8 @@
             </tr>
             <tr>
                 <th>Gambar Tampilan</th>
-                <td>
-                    <img src="{{ public_path('storage/' . $data->image3) }}" alt="Gambar Tampilan"
-                        style="width: 100px; height: 100px">
+                <td style="text-align: center; vertical-align: middle;">
+                    <img src="{{ public_path('storage/' . $data->image3) }}" alt="Gambar Tampilan">
                 </td>
             </tr>
             <br>
@@ -142,9 +152,8 @@
             </tr>
             <tr>
                 <th>Gambar Free Memory</th>
-                <td>
-                    <img src="{{ public_path('storage/' . $data->image4) }}" alt="Gambar Free Memory"
-                        style="width: 100px; height: 100px">
+                <td style="text-align: center; vertical-align: middle;">
+                    <img src="{{ public_path('storage/' . $data->image4) }}" alt="Gambar RAM">
                 </td>
             </tr>
             <br>
@@ -154,9 +163,8 @@
             </tr>
             <tr>
                 <th>Gambar HDD Terpakai</th>
-                <td>
-                    <img src="{{ public_path('storage/' . $data->image5) }}" alt="Gambar HDD Terpakai"
-                        style="width: 100px; height: 100px">
+                <td style="text-align: center; vertical-align: middle;">
+                    <img src="{{ public_path('storage/' . $data->image1) }}" alt="Gambar HDD">
                 </td>
             </tr>
             <br>
@@ -166,9 +174,8 @@
             </tr>
             <tr>
                 <th>Gambar Pengunjung</th>
-                <td>
-                    <img src="{{ public_path('storage/' . $data->image6) }}" alt="Gambar Pengunjung"
-                        style="width: 100px; height: 100px">
+                <td style="text-align: center; vertical-align: middle;">
+                    <img src="{{ public_path('storage/' . $data->image1) }}" alt="Pengunjung">
                 </td>
             </tr>
             <br>
@@ -186,29 +193,30 @@
     <div class="signature">
         <table>
             <tr>
-                <td colspan="2" style="width: 300px;">&nbsp;</td>
+                <td colspan="2">&nbsp;</td>
             </tr>
             <tr>
-                <td class="bold" colspan="2" style="text-align: center; width: 300px;">Disetujui Oleh:</td>
+                <td class="bold" colspan="2">Disetujui Oleh:</td>
             </tr>
             <tr>
-                <td class="bold" style="text-align: center;">Kepala Seksi Pemeliharaan Sistem TI</td>
-                <td class="bold" style="text-align: center;">Kepala Departemen Operasional TI</td>
+                <td class="bold">Kepala Seksi Pemeliharaan Sistem TI</td>
+                <td class="bold">Kepala Departemen Operasional TI</td>
             </tr>
             <tr>
-                <td style="width: 300px;">&nbsp;</td>
-                <td style="width: 300px;">&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
             </tr>
             <tr>
-                <td style="width: 300px;">&nbsp;</td>
-                <td style="width: 300px;">&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
             </tr>
             <tr>
-                <td class="bold" style="text-align: center;">Tedi Hermawan</td>
-                <td class="bold" style="text-align: center;">Ecep Jenal M.</td>
+                <td class="bold">Tedi Hermawan</td>
+                <td class="bold">Ecep Jenal M.</td>
             </tr>
         </table>
     </div>
+
     <footer>
         HARSIS - Departemen Operasional TI - Divisi TI
     </footer>
